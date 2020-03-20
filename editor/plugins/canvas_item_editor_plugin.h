@@ -84,6 +84,10 @@ public:
 		TOOL_MAX
 	};
 
+	Button *key_auto_insert_button;
+
+	static CanvasItemEditor *singleton;
+
 private:
 	EditorNode *editor;
 
@@ -380,7 +384,6 @@ private:
 	Button *key_rot_button;
 	Button *key_scale_button;
 	Button *key_insert_button;
-	Button *key_auto_insert_button;
 
 	PopupMenu *selection_menu;
 
@@ -592,8 +595,6 @@ protected:
 
 	template <class P, class C>
 	void space_selected_items();
-
-	static CanvasItemEditor *singleton;
 
 public:
 	enum SnapMode {
