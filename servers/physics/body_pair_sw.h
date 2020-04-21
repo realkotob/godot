@@ -56,6 +56,7 @@ class BodyPairSW : public ConstraintSW {
 
 		Vector3 position;
 		Vector3 normal;
+		Vector3 up_A, up_B;
 		Vector3 local_A, local_B;
 		real_t acc_normal_impulse; // accumulated normal impulse (Pn)
 		Vector3 acc_tangent_impulse; // accumulated tangent impulse (Pt)

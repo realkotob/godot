@@ -288,6 +288,8 @@ bool BodyPairSW::setup(real_t p_step) {
 
 		Vector3 global_A = xform_Au.xform(c.local_A);
 		Vector3 global_B = xform_Bu.xform(c.local_B);
+		c.up_A = A->get_transform().basis[1];
+		c.up_B = B->get_transform().basis[1];
 
 		real_t depth = c.normal.dot(global_A - global_B);
 
@@ -420,9 +422,14 @@ void BodyPairSW::solve(real_t p_step) {
 			c.acc_normal_impulse = MAX(jnOld + jn, 0.0f);
 
 			Vector3 j = c.normal * (c.acc_normal_impulse - jnOld);
-
-			A->apply_impulse(c.rA + A->get_center_of_mass(), -j);
-			B->apply_impulse(c.rB + B->get_center_of_mass(), j);
+			j = j - c.up_A.normalized() * j.dot(c.up_A.normalized());
+			// char buffer[1000];
+			printf("Horizontal bounce is (%f,%f,%f), up_A is (%f,%f,%f), up_B is (%f,%f,%f)", j.x, j.y, j.z, c.up_A.x, c.up_A.y, c.up_A.z, c.up_B.x, c.up_B.y, c.up_B.z);
+			// print_line(buffer);
+			if (j.length() > MIN_VELOCITY) {
+				A->apply_impulse(c.rA + A->get_center_of_mass(), -j);
+				B->apply_impulse(c.rB + B->get_center_of_mass(), j);
+			}
 
 			c.active = true;
 		}
