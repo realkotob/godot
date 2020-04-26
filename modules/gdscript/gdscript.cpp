@@ -1276,10 +1276,17 @@ void GDScriptInstance::get_method_list(List<MethodInfo> *p_list) const {
 		for (Map<StringName, GDScriptFunction *>::Element *E = sptr->member_functions.front(); E; E = E->next()) {
 
 			MethodInfo mi;
+			GDScriptFunction *func = E->get();
 			mi.name = E->key();
 			mi.flags |= METHOD_FLAG_FROM_SCRIPT;
-			for (int i = 0; i < E->get()->get_argument_count(); i++)
-				mi.arguments.push_back(PropertyInfo(Variant::NIL, "arg" + itos(i)));
+			for (int i = 0; i < func->get_argument_count(); i++) {
+				mi.arguments.push_back(PropertyInfo(func->get_argument_type(i).builtin_type, func->get_argument_name(i)));
+			}
+
+			for(int i = 0; i < func->get_default_argument_count(); i++) {
+				mi.default_arguments.push_back(func->get_default_argument(i));
+			}
+			mi.return_val =  func->get_return_type();
 			p_list->push_back(mi);
 		}
 		sptr = sptr->_base;
