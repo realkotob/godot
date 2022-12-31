@@ -1866,6 +1866,25 @@ void EditorNode::_dialog_action(String p_file) {
 
 			load_scene(p_file, false, true);
 		} break;
+		case FILE_NEW_MATERIAL_FROM_SHADER: {
+			// Create new shader material and set the shader to the one selected in the file dialog.
+			Ref<ShaderMaterial> shader_material = Ref<ShaderMaterial>(memnew(ShaderMaterial));
+			shader_material->set_shader(Ref<Shader>(ResourceLoader::load(p_file)));
+			// Add number suffix to the file name if it already exists.
+			String base_name = p_file.get_file().get_basename() + "_material";
+			String ext = "tres";
+			String material_path = p_file.get_base_dir().path_join(base_name + "." + ext);
+			int number = 1;
+			while (FileAccess::exists(material_path)) {
+				material_path = p_file.get_base_dir().path_join(base_name + "_" + itos(number) + "." + ext);
+				number++;
+			}
+			Error err = ResourceSaver::save(shader_material, material_path);
+			if (err != OK) {
+				show_warning(TTR("Could not save shader material!"), TTR("New Shader Material"));
+				return;
+			}
+		} break;
 		case FILE_OPEN_SCENE: {
 			load_scene(p_file);
 		} break;
@@ -3973,6 +3992,11 @@ Ref<EditorUndoRedoManager> &EditorNode::get_undo_redo() {
 
 void EditorNode::_inherit_request(String p_file) {
 	current_menu_option = FILE_NEW_INHERITED_SCENE;
+	_dialog_action(p_file);
+}
+
+void EditorNode::_create_material_from_shader_request(String p_file) {
+	current_menu_option = FILE_NEW_MATERIAL_FROM_SHADER;
 	_dialog_action(p_file);
 }
 
@@ -7014,6 +7038,7 @@ EditorNode::EditorNode() {
 
 	FileSystemDock *filesystem_dock = memnew(FileSystemDock);
 	filesystem_dock->connect("inherit", callable_mp(this, &EditorNode::_inherit_request));
+	filesystem_dock->connect("create_material_from_shader", callable_mp(this, &EditorNode::_create_material_from_shader_request));
 	filesystem_dock->connect("instantiate", callable_mp(this, &EditorNode::_instantiate_request));
 	filesystem_dock->connect("display_mode_changed", callable_mp(this, &EditorNode::_save_docks));
 	get_project_settings()->connect_filesystem_dock_signals(filesystem_dock);

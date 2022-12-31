@@ -51,5 +51,10 @@
 			<description>
 			</description>
 		</signal>
+		<signal name="create_material_from_shader">
+			<param index="0" name="file" type="String" />
+			<description>
+			</description>
+		</signal>
 	</signals>
 </class>
