@@ -1356,6 +1356,25 @@ void FileSystemDock::_try_duplicate_item(const FileOrFolder &p_item, const Strin
 	}
 }
 
+void FileSystemDock::_try_create_material_from_shader(const FileOrFolder &p_item, const String &p_new_path) const {
+	Ref<ShaderMaterial> shader_material = Ref<ShaderMaterial>(memnew(ShaderMaterial));
+	shader_material->set_shader(Ref<Shader>(ResourceLoader::load(p_item)));
+	// Add number suffix to the file name if it already exists.
+	const String base_name = p_item.get_file().get_basename() + "_material";
+	const String ext = "tres";
+	String material_path = p_item.get_base_dir().path_join(base_name + "." + ext);
+	int number = 1;
+	while (FileAccess::exists(material_path)) {
+		material_path = p_item.get_base_dir().path_join(base_name + "_" + itos(number) + "." + ext);
+		number++;
+	}
+	Error err = ResourceSaver::save(shader_material, material_path);
+	if (err != OK) {
+		EditorNode::get_singleton()->show_warning(TTR("Could not save shader material!"), TTR("New Shader Material"));
+		return;
+	}
+}
+
 void FileSystemDock::_update_resource_paths_after_move(const HashMap<String, String> &p_renames) const {
 	// Rename all resources loaded, be it subresources or actual resources.
 	List<Ref<Resource>> cached;
@@ -1653,6 +1672,38 @@ void FileSystemDock::_duplicate_operation_confirm() {
 	_rescan();
 }
 
+void FileSystemDock::_new_material_from_shader_confirm() {
+	String new_name = new_material_from_shader_dialog->get_text().strip_edges();
+	if (new_name.length() == 0) {
+		EditorNode::get_singleton()->show_warning(TTR("No name provided."));
+		return;
+	} else if (new_name.contains("/") || new_name.contains("\\") || new_name.contains(":")) {
+		EditorNode::get_singleton()->show_warning(TTR("Name contains invalid characters."));
+		return;
+	}
+
+	String base_dir = to_duplicate.path.get_base_dir();
+	// get_base_dir() returns "some/path" if the original path was "some/path/", so work it around.
+	if (to_duplicate.path.ends_with("/")) {
+		base_dir = base_dir.get_base_dir();
+	}
+
+	String new_path = base_dir.path_join(new_name);
+
+	// Present a more user friendly warning for name conflict
+	Ref<DirAccess> da = DirAccess::create(DirAccess::ACCESS_RESOURCES);
+	if (da->file_exists(new_path) || da->dir_exists(new_path)) {
+		EditorNode::get_singleton()->show_warning(TTR("A file or folder with this name already exists."));
+		return;
+	}
+
+	_try_duplicate_item(to_duplicate, new_path);
+
+	// Rescan everything.
+	print_verbose("FileSystem: calling rescan.");
+	_rescan();
+}
+
 void FileSystemDock::_move_with_overwrite() {
 	_move_operation_confirm(to_move_path, true);
 }
@@ -1846,22 +1897,7 @@ void FileSystemDock::_file_option(int p_option, const Vector<String> &p_selected
 			// Create a new shader material from the selected shader resource.
 			if (p_selected.size() == 1) {
 				const String &p_file = p_selected[0];
-				Ref<ShaderMaterial> shader_material = Ref<ShaderMaterial>(memnew(ShaderMaterial));
-				shader_material->set_shader(Ref<Shader>(ResourceLoader::load(p_file)));
-				// Add number suffix to the file name if it already exists.
-				const String base_name = p_file.get_file().get_basename() + "_material";
-				const String ext = "tres";
-				String material_path = p_file.get_base_dir().path_join(base_name + "." + ext);
-				int number = 1;
-				while (FileAccess::exists(material_path)) {
-					material_path = p_file.get_base_dir().path_join(base_name + "_" + itos(number) + "." + ext);
-					number++;
-				}
-				Error err = ResourceSaver::save(shader_material, material_path);
-				if (err != OK) {
-					EditorNode::get_singleton()->show_warning(TTR("Could not save shader material!"), TTR("New Shader Material"));
-					return;
-				}
+				
 			}
 		} break;
 
@@ -3250,6 +3286,17 @@ FileSystemDock::FileSystemDock() {
 	add_child(duplicate_dialog);
 	duplicate_dialog->register_text_enter(duplicate_dialog_text);
 	duplicate_dialog->connect("confirmed", callable_mp(this, &FileSystemDock::_duplicate_operation_confirm));
+
+	new_material_from_shader_dialog = memnew(ConfirmationDialog);
+	VBoxContainer *new_material_from_shader_dialog_vb = memnew(VBoxContainer);
+	new_material_from_shader_dialog->add_child(new_material_from_shader_dialog_vb);
+
+	new_material_from_shader_dialog_text = memnew(LineEdit);
+	new_material_from_shader_dialog_vb->add_margin_child(TTR("Name:"), new_material_from_shader_dialog_text);
+	new_material_from_shader_dialog->set_ok_button_text(TTR("Create Material"));
+	add_child(new_material_from_shader_dialog);
+	new_material_from_shader_dialog->register_text_enter(new_material_from_shader_dialog_text);
+	new_material_from_shader_dialog->connect("confirmed", callable_mp(this, &FileSystemDock::_new_material_from_shader_confirm));
 
 	make_dir_dialog = memnew(ConfirmationDialog);
 	make_dir_dialog->set_title(TTR("Create Folder"));
