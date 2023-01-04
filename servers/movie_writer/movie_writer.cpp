@@ -146,6 +146,7 @@ void MovieWriter::_bind_methods() {
 	GLOBAL_DEF_BASIC("editor/movie_writer/disable_vsync", false);
 	GLOBAL_DEF_BASIC("editor/movie_writer/fps", 60);
 	ProjectSettings::get_singleton()->set_custom_property_info("editor/movie_writer/fps", PropertyInfo(Variant::INT, "editor/movie_writer/fps", PROPERTY_HINT_RANGE, "1,300,1,suffix:FPS"));
+	GLOBAL_DEF_BASIC("editor/movie_writer/record_audio", true);
 }
 
 void MovieWriter::set_extensions_hint() {
@@ -182,7 +183,9 @@ void MovieWriter::add_frame(const Ref<Image> &p_image) {
 	DisplayServer::get_singleton()->window_set_title(vformat("MovieWriter: Frame %d (time: %s) - %s", Engine::get_singleton()->get_frames_drawn(), movie_time, project_name));
 #endif
 
-	AudioDriverDummy::get_dummy_singleton()->mix_audio(mix_rate / fps, audio_mix_buffer.ptr());
+	if(GLOBAL_GET("editor/movie_writer/record_audio")) {
+		AudioDriverDummy::get_dummy_singleton()->mix_audio(mix_rate / fps, audio_mix_buffer.ptr());
+	}
 	write_frame(p_image, audio_mix_buffer.ptr());
 }
 

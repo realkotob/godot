@@ -1780,7 +1780,7 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 		audio_driver_idx = 0;
 	}
 
-	if (Engine::get_singleton()->get_write_movie_path() != String()) {
+	if (Engine::get_singleton()->get_write_movie_path() != String() && GLOBAL_GET("editor/movie_writer/record_audio")) {
 		// Always use dummy driver for audio driver (which is last), also in no threaded mode.
 		audio_driver_idx = AudioDriverManager::get_driver_count() - 1;
 		AudioDriverDummy::get_dummy_singleton()->set_use_threads(false);
