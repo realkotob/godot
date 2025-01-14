@@ -30,16 +30,35 @@
 
 #include "multimesh_instance_3d.h"
 
+void MultiMeshInstance3D::_refresh_interpolated() {
+	if (is_inside_tree() && multimesh.is_valid()) {
+		bool interpolated = is_physics_interpolated_and_enabled();
+		multimesh->set_physics_interpolated(interpolated);
+	}
+}
+
+void MultiMeshInstance3D::_physics_interpolated_changed() {
+	VisualInstance3D::_physics_interpolated_changed();
+	_refresh_interpolated();
+}
+
 void MultiMeshInstance3D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_multimesh", "multimesh"), &MultiMeshInstance3D::set_multimesh);
 	ClassDB::bind_method(D_METHOD("get_multimesh"), &MultiMeshInstance3D::get_multimesh);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "multimesh", PROPERTY_HINT_RESOURCE_TYPE, "MultiMesh"), "set_multimesh", "get_multimesh");
 }
 
+void MultiMeshInstance3D::_notification(int p_what) {
+	if (p_what == NOTIFICATION_ENTER_TREE) {
+		_refresh_interpolated();
+	}
+}
+
 void MultiMeshInstance3D::set_multimesh(const Ref<MultiMesh> &p_multimesh) {
 	multimesh = p_multimesh;
 	if (multimesh.is_valid()) {
 		set_base(multimesh->get_rid());
+		_refresh_interpolated();
 	} else {
 		set_base(RID());
 	}
@@ -47,6 +66,26 @@ void MultiMeshInstance3D::set_multimesh(const Ref<MultiMesh> &p_multimesh) {
 
 Ref<MultiMesh> MultiMeshInstance3D::get_multimesh() const {
 	return multimesh;
+}
+
+Array MultiMeshInstance3D::get_meshes() const {
+	if (multimesh.is_null() || multimesh->get_mesh().is_null() || multimesh->get_transform_format() != MultiMesh::TransformFormat::TRANSFORM_3D) {
+		return Array();
+	}
+
+	int count = multimesh->get_visible_instance_count();
+	if (count == -1) {
+		count = multimesh->get_instance_count();
+	}
+
+	Ref<Mesh> mesh = multimesh->get_mesh();
+
+	Array results;
+	for (int i = 0; i < count; i++) {
+		results.push_back(multimesh->get_instance_transform(i));
+		results.push_back(mesh);
+	}
+	return results;
 }
 
 AABB MultiMeshInstance3D::get_aabb() const {

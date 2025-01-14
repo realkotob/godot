@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 - 2023 the ThorVG project. All rights reserved.
+ * Copyright (c) 2020 - 2024 the ThorVG project. All rights reserved.
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,11 @@
  * SOFTWARE.
  */
 
-#ifndef _TVG_SCENE_IMPL_H_
-#define _TVG_SCENE_IMPL_H_
+#ifndef _TVG_SCENE_H_
+#define _TVG_SCENE_H_
 
-#include <float.h>
+#include "tvgMath.h"
 #include "tvgPaint.h"
-
-/************************************************************************/
-/* Internal Class Implementation                                        */
-/************************************************************************/
 
 struct SceneIterator : Iterator
 {
@@ -62,11 +58,12 @@ struct SceneIterator : Iterator
 struct Scene::Impl
 {
     list<Paint*> paints;
-    RenderMethod* renderer = nullptr;    //keep it for explicit clear
     RenderData rd = nullptr;
     Scene* scene = nullptr;
-    uint8_t opacity;                     //for composition
-    bool needComp;                       //composite or not
+    RenderRegion vport = {0, 0, INT32_MAX, INT32_MAX};
+    Array<RenderEffect*>* effects = nullptr;
+    uint8_t opacity;         //for composition
+    bool needComp = false;   //composite or not
 
     Impl(Scene* s) : scene(s)
     {
@@ -74,34 +71,30 @@ struct Scene::Impl
 
     ~Impl()
     {
-        for (auto paint : paints) {
-            if (paint->pImpl->unref() == 0) delete(paint);
-        }
-    }
+        resetEffects();
 
-    bool dispose(RenderMethod& renderer)
-    {
         for (auto paint : paints) {
-            paint->pImpl->dispose(renderer);
+            if (P(paint)->unref() == 0) delete(paint);
         }
 
-        renderer.dispose(rd);
-        this->renderer = nullptr;
-        this->rd = nullptr;
-
-        return true;
+        if (auto renderer = PP(scene)->renderer) {
+            renderer->dispose(rd);
+        }
     }
 
     bool needComposition(uint8_t opacity)
     {
         if (opacity == 0 || paints.empty()) return false;
 
+        //post effects requires composition
+        if (effects) return true;
+
         //Masking may require composition (even if opacity == 255)
         auto compMethod = scene->composite(nullptr);
         if (compMethod != CompositeMethod::None && compMethod != CompositeMethod::ClipPath) return true;
 
         //Blending may require composition (even if opacity == 255)
-        if (scene->blend() != BlendMethod::Normal) return true;
+        if (PP(scene)->blendMethod != BlendMethod::Normal) return true;
 
         //Half translucent requires intermediate composition.
         if (opacity == 255) return false;
@@ -109,57 +102,59 @@ struct Scene::Impl
         //If scene has several children or only scene, it may require composition.
         //OPTIMIZE: the bitmap type of the picture would not need the composition.
         //OPTIMIZE: a single paint of a scene would not need the composition.
-        if (paints.size() == 1 && paints.front()->identifier() == TVG_CLASS_ID_SHAPE) return false;
+        if (paints.size() == 1 && paints.front()->type() == Type::Shape) return false;
 
         return true;
     }
 
-    RenderData update(RenderMethod &renderer, const RenderTransform* transform, Array<RenderData>& clips, uint8_t opacity, RenderUpdateFlag flag, bool clipper)
+    RenderData update(RenderMethod* renderer, const Matrix& transform, Array<RenderData>& clips, uint8_t opacity, RenderUpdateFlag flag, TVG_UNUSED bool clipper)
     {
+        this->vport = renderer->viewport();
+
         if ((needComp = needComposition(opacity))) {
             /* Overriding opacity value. If this scene is half-translucent,
-               It must do intermeidate composition with that opacity value. */
+               It must do intermediate composition with that opacity value. */
             this->opacity = opacity;
             opacity = 255;
         }
-
-        this->renderer = &renderer;
-
-        if (clipper) {
-            Array<RenderData> rds;
-            rds.reserve(paints.size());
-            for (auto paint : paints) {
-                rds.push(paint->pImpl->update(renderer, transform, clips, opacity, flag, true));
-            }
-            rd = renderer.prepare(rds, rd, transform, clips, opacity, flag);
-            return rd;
-        } else {
-            for (auto paint : paints) {
-                paint->pImpl->update(renderer, transform, clips, opacity, flag, false);
-            }
-            return nullptr;
+        for (auto paint : paints) {
+            paint->pImpl->update(renderer, transform, clips, opacity, flag, false);
         }
+
+        return nullptr;
     }
 
-    bool render(RenderMethod& renderer)
+    bool render(RenderMethod* renderer)
     {
-        Compositor* cmp = nullptr;
+        RenderCompositor* cmp = nullptr;
+        auto ret = true;
+
+        renderer->blend(PP(scene)->blendMethod);
 
         if (needComp) {
-            cmp = renderer.target(bounds(renderer), renderer.colorSpace());
-            renderer.beginComposite(cmp, CompositeMethod::None, opacity);
+            cmp = renderer->target(bounds(renderer), renderer->colorSpace());
+            renderer->beginComposite(cmp, CompositeMethod::None, opacity);
         }
 
         for (auto paint : paints) {
-            if (!paint->pImpl->render(renderer)) return false;
+            ret &= paint->pImpl->render(renderer);
         }
 
-        if (cmp) renderer.endComposite(cmp);
+        if (cmp) {
+            //Apply post effects if any.
+            if (effects) {
+                auto direct = effects->count == 1 ? true : false;
+                for (auto e = effects->begin(); e < effects->end(); ++e) {
+                    renderer->effect(cmp, *e, opacity, direct);
+                }
+            }
+            renderer->endComposite(cmp);
+        }
 
-        return true;
+        return ret;
     }
 
-    RenderRegion bounds(RenderMethod& renderer) const
+    RenderRegion bounds(RenderMethod* renderer) const
     {
         if (paints.empty()) return {0, 0, 0, 0};
 
@@ -178,7 +173,23 @@ struct Scene::Impl
             if (y2 < region.y + region.h) y2 = (region.y + region.h);
         }
 
-        return {x1, y1, (x2 - x1), (y2 - y1)};
+        //Extends the render region if post effects require
+        int32_t ex = 0, ey = 0, ew = 0, eh = 0;
+        if (effects) {
+            for (auto e = effects->begin(); e < effects->end(); ++e) {
+                auto effect = *e;
+                if (effect->rd || renderer->prepare(effect)) {
+                    ex = std::min(ex, effect->extend.x);
+                    ey = std::min(ey, effect->extend.y);
+                    ew = std::max(ew, effect->extend.w);
+                    eh = std::max(eh, effect->extend.h);
+                }
+            }
+        }
+
+        auto ret = RenderRegion{x1 + ex, y1 + ey, (x2 - x1) + ew, (y2 - y1) + eh};
+        ret.intersect(this->vport);
+        return ret;
     }
 
     bool bounds(float* px, float* py, float* pw, float* ph, bool stroking)
@@ -213,11 +224,12 @@ struct Scene::Impl
         return true;
     }
 
-    Paint* duplicate()
+    Paint* duplicate(Paint* ret)
     {
-        auto ret = Scene::gen();
+        if (ret) TVGERR("RENDERER", "TODO: duplicate()");
 
-        auto dup = ret.get()->pImpl;
+        auto scene = Scene::gen().release();
+        auto dup = scene->pImpl;
 
         for (auto paint : paints) {
             auto cdup = paint->duplicate();
@@ -225,25 +237,25 @@ struct Scene::Impl
             dup->paints.push_back(cdup);
         }
 
-        return ret.release();
+        if (effects) TVGERR("RENDERER", "TODO: Duplicate Effects?");
+
+        return scene;
     }
 
     void clear(bool free)
     {
-        auto dispose = renderer ? true : false;
-
         for (auto paint : paints) {
-            if (dispose) free &= P(paint)->dispose(*renderer);
             if (P(paint)->unref() == 0 && free) delete(paint);
         }
         paints.clear();
-        renderer = nullptr;
     }
 
     Iterator* iterator()
     {
         return new SceneIterator(&paints);
     }
+
+    Result resetEffects();
 };
 
-#endif //_TVG_SCENE_IMPL_H_
+#endif //_TVG_SCENE_H_

@@ -57,7 +57,9 @@ Point2 Polygon2D::_edit_get_pivot() const {
 bool Polygon2D::_edit_use_pivot() const {
 	return true;
 }
+#endif // TOOLS_ENABLED
 
+#ifdef DEBUG_ENABLED
 Rect2 Polygon2D::_edit_get_rect() const {
 	if (rect_cache_dirty) {
 		int l = polygon.size();
@@ -88,7 +90,7 @@ bool Polygon2D::_edit_is_selected_on_click(const Point2 &p_point, double p_toler
 	}
 	return Geometry2D::is_point_in_polygon(p_point - get_offset(), polygon2d);
 }
-#endif
+#endif // DEBUG_ENABLED
 
 void Polygon2D::_validate_property(PropertyInfo &p_property) const {
 	if (!invert && p_property.name == "invert_border") {
@@ -101,7 +103,12 @@ void Polygon2D::_skeleton_bone_setup_changed() {
 }
 
 void Polygon2D::_notification(int p_what) {
+	if (p_what == NOTIFICATION_TRANSFORM_CHANGED && !Engine::get_singleton()->is_editor_hint()) {
+		return; // Mesh recreation for NOTIFICATION_TRANSFORM_CHANGED is only needed in editor.
+	}
+
 	switch (p_what) {
+		case NOTIFICATION_TRANSFORM_CHANGED:
 		case NOTIFICATION_DRAW: {
 			if (polygon.size() < 3) {
 				return;
@@ -364,7 +371,30 @@ void Polygon2D::_notification(int p_what) {
 
 				arr[RS::ARRAY_INDEX] = index_array;
 
-				RS::get_singleton()->mesh_add_surface_from_arrays(mesh, RS::PRIMITIVE_TRIANGLES, arr, Array(), Dictionary(), RS::ARRAY_FLAG_USE_2D_VERTICES);
+				RS::SurfaceData sd;
+
+				if (skeleton_node) {
+					// Compute transform between mesh and skeleton for runtime AABB compute.
+					const Transform2D mesh_transform = get_global_transform();
+					const Transform2D skeleton_transform = skeleton_node->get_global_transform();
+					const Transform2D mesh_to_sk2d = skeleton_transform.affine_inverse() * mesh_transform;
+
+					// Convert 2d transform to 3d.
+					sd.mesh_to_skeleton_xform.basis.rows[0][0] = mesh_to_sk2d.columns[0][0];
+					sd.mesh_to_skeleton_xform.basis.rows[1][0] = mesh_to_sk2d.columns[0][1];
+					sd.mesh_to_skeleton_xform.origin.x = mesh_to_sk2d.get_origin().x;
+
+					sd.mesh_to_skeleton_xform.basis.rows[0][1] = mesh_to_sk2d.columns[1][0];
+					sd.mesh_to_skeleton_xform.basis.rows[1][1] = mesh_to_sk2d.columns[1][1];
+					sd.mesh_to_skeleton_xform.origin.y = mesh_to_sk2d.get_origin().y;
+				}
+
+				Error err = RS::get_singleton()->mesh_create_surface_data_from_arrays(&sd, RS::PRIMITIVE_TRIANGLES, arr, Array(), Dictionary(), RS::ARRAY_FLAG_USE_2D_VERTICES);
+				if (err != OK) {
+					return;
+				}
+
+				RS::get_singleton()->mesh_add_surface(mesh, sd);
 				RS::get_singleton()->canvas_item_add_mesh(get_canvas_item(), mesh, Transform2D(), Color(1, 1, 1), texture.is_valid() ? texture->get_rid() : RID());
 			}
 
@@ -654,7 +684,7 @@ void Polygon2D::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_VECTOR2_ARRAY, "uv"), "set_uv", "get_uv");
 	ADD_PROPERTY(PropertyInfo(Variant::PACKED_COLOR_ARRAY, "vertex_colors"), "set_vertex_colors", "get_vertex_colors");
 	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "polygons"), "set_polygons", "get_polygons");
-	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "bones", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NO_EDITOR), "_set_bones", "_get_bones");
+	ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "bones", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NO_EDITOR | PROPERTY_USAGE_INTERNAL), "_set_bones", "_get_bones");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "internal_vertex_count", PROPERTY_HINT_RANGE, "0,1000"), "set_internal_vertex_count", "get_internal_vertex_count");
 }
 

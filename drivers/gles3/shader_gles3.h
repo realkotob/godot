@@ -36,16 +36,12 @@
 #include "core/string/string_builder.h"
 #include "core/templates/hash_map.h"
 #include "core/templates/local_vector.h"
-#include "core/templates/rb_map.h"
 #include "core/templates/rid_owner.h"
-#include "core/variant/variant.h"
 #include "servers/rendering_server.h"
 
 #ifdef GLES3_ENABLED
 
 #include "platform_gl.h"
-
-#include <stdio.h>
 
 class ShaderGLES3 {
 public:
@@ -148,7 +144,7 @@ private:
 	static bool shader_cache_save_debug;
 	bool shader_cache_dir_valid = false;
 
-	int64_t max_image_units = 0;
+	GLint max_image_units = 0;
 
 	enum StageType {
 		STAGE_TYPE_VERTEX,
@@ -209,7 +205,9 @@ protected:
 				_compile_specialization(s, p_variant, version, p_specialization);
 				version->variants[p_variant].insert(p_specialization, s);
 				spec = version->variants[p_variant].lookup_ptr(p_specialization);
-				_save_to_cache(version);
+				if (shader_cache_dir_valid) {
+					_save_to_cache(version);
+				}
 			}
 		} else if (spec->build_queued) {
 			// Still queued, wait
