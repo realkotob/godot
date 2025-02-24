@@ -16,21 +16,31 @@
 # Milan <brnecovsky@gmail.com>, 2023.
 # Tengado <tenda151002@gmail.com>, 2023.
 # Lukáš Ševc <sevclukas0@gmail.com>, 2023.
+# Milan Šalka <salka.milan@googlemail.com>, 2023.
+# Mikuláš Suchanovský <mikulassuchanovsky@protonmail.com>, 2023.
+# Ellie Star <gender.thief.star@gmail.com>, 2023.
+# Lmpsk <adamgramblicka@hotmail.com>, 2024.
+# Gelissean <gelu586@gmail.com>, 2024.
+# Bobo <ctiborboborkapor@gmail.com>, 2024.
+# David Chorváth <dadulo33@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Godot Engine editor interface\n"
 "Report-Msgid-Bugs-To: https://github.com/godotengine/godot\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-09-29 19:03+0000\n"
-"Last-Translator: Lukáš Ševc <sevclukas0@gmail.com>\n"
+"PO-Revision-Date: 2024-10-28 14:43+0000\n"
+"Last-Translator: David Chorváth <dadulo33@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/godot-engine/godot/"
 "sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8.2-dev\n"
+
+msgid "Main Thread"
+msgstr "Hlavné vlákno"
 
 msgid "Unset"
 msgstr "Nenastavené"
@@ -128,6 +138,9 @@ msgstr "Späť, Sony Select, Xbox Back, Nintendo -"
 msgid "Guide, Sony PS, Xbox Home"
 msgstr "Sprievodca, Sony PS, Xbox Home"
 
+msgid "Start, Xbox Menu, Nintendo +"
+msgstr "Štart, Xbox Menu, Nintendo +"
+
 msgid "Left Stick, Sony L3, Xbox L/LS"
 msgstr "Ľavá páčka, Sony L3, Xbox L/LS"
 
@@ -152,17 +165,35 @@ msgstr "D-pad vľavo"
 msgid "D-pad Right"
 msgstr "D-pad vpravo"
 
+msgid "Xbox Share, PS5 Microphone, Nintendo Capture"
+msgstr "Xbox zdieľanie, PS5 mikrofón, Nintendo záznam"
+
+msgid "Xbox Paddle 1"
+msgstr "Xbox pádlo 1"
+
+msgid "Xbox Paddle 2"
+msgstr "Xbox pádlo 2"
+
+msgid "Xbox Paddle 3"
+msgstr "Xbox pádlo 3"
+
+msgid "Xbox Paddle 4"
+msgstr "Xbox pádlo 4"
+
 msgid "PS4/5 Touchpad"
 msgstr "PS4/5 Touchpad"
 
 msgid "Joypad Button %d"
 msgstr "Joypad Tlačidlo %d"
 
+msgid "Pressure:"
+msgstr "Tlak:"
+
 msgid "canceled"
-msgstr "zrušený"
+msgstr "zrušené"
 
 msgid "touched"
-msgstr "dotknutý"
+msgstr "dotknuté"
 
 msgid "released"
 msgstr "pustený"
@@ -184,6 +215,9 @@ msgstr "Gesto presúvania na (%s) s deltou (%s)"
 msgid "MIDI Input on Channel=%s Message=%s"
 msgstr "Vstup MIDI na Kanále=%s Správa=%s"
 
+msgid "Input Event with Shortcut=%s"
+msgstr "Vstupná udalosť so skratkou=%s"
+
 msgid "Accept"
 msgstr "Potvrdiť"
 
@@ -192,6 +226,12 @@ msgstr "Zvoliť"
 
 msgid "Cancel"
 msgstr "Zrušiť"
+
+msgid "Focus Next"
+msgstr "Zamerať ďalšie"
+
+msgid "Focus Prev"
+msgstr "Zamerať predchádzajúce"
 
 msgid "Left"
 msgstr "Vľavo"
@@ -232,6 +272,9 @@ msgstr "Späť"
 msgid "Redo"
 msgstr "Prerobiť"
 
+msgid "Completion Query"
+msgstr "Dotaz na dokončenie"
+
 msgid "New Line"
 msgstr "Nový riadok"
 
@@ -246,6 +289,9 @@ msgstr "Odsadenie"
 
 msgid "Dedent"
 msgstr "Zmazať odsadenie"
+
+msgid "Backspace"
+msgstr "Backspace"
 
 msgid "Backspace Word"
 msgstr "Zmazať slovo naľavo"
@@ -319,6 +365,18 @@ msgstr "Označiť slovo pod kurzorom"
 msgid "Add Selection for Next Occurrence"
 msgstr "Pridať ďalší výskyt do označenia"
 
+msgid "Skip Selection for Next Occurrence"
+msgstr "Preskočiť ďalší výskyt"
+
+msgid "Clear Carets and Selection"
+msgstr "Vyčistiť vsuvky a výber"
+
+msgid "Toggle Insert Mode"
+msgstr "Prepnúť mód vloženia"
+
+msgid "Submit Text"
+msgstr "Odoslať text"
+
 msgid "Duplicate Nodes"
 msgstr "Duplikovať Nody"
 
@@ -333,6 +391,12 @@ msgstr "Obnoviť"
 
 msgid "Show Hidden"
 msgstr "Zobraziť Skryté"
+
+msgid "Swap Input Direction"
+msgstr "Prevrátiť smer vstupu"
+
+msgid "Invalid input %d (not passed) in expression"
+msgstr "Nesprávny vstup %d (neprešiel) vo výraze"
 
 msgid "self can't be used because instance is null (not passed)"
 msgstr "self nemôže byť použité, pretože inštancia je null (nie je platná)"
@@ -379,15 +443,6 @@ msgstr "PiB"
 msgid "EiB"
 msgstr "EiB"
 
-msgid "Example: %s"
-msgstr "Príklad: %s"
-
-msgid "%d item"
-msgid_plural "%d items"
-msgstr[0] "%d položka"
-msgstr[1] "%d položky"
-msgstr[2] "%d položiek"
-
 msgid ""
 "Invalid action name. It cannot be empty nor contain '/', ':', '=', '\\' or "
 "'\"'"
@@ -399,7 +454,10 @@ msgid "An action with the name '%s' already exists."
 msgstr "Akcia s názvom '%s' už existuje."
 
 msgid "Cannot Revert - Action is same as initial"
-msgstr "Nie je možný návrat - akcia je rovnaká ako počiatočná"
+msgstr "Nemožno vrátiť - Akcia je rovnaká ako pôvodná"
+
+msgid "Revert Action"
+msgstr "Vrátiť akciu"
 
 msgid "Add Event"
 msgstr "Pridať udalosť"
@@ -416,8 +474,14 @@ msgstr "Upraviť Udalosť"
 msgid "Remove Event"
 msgstr "Odstrániť Udalosť"
 
-msgid "Filter by name..."
-msgstr "Filtrovať podľa názvu..."
+msgid "Filter by Name"
+msgstr "Filtrovať podľa názvu"
+
+msgid "Clear All"
+msgstr "Vyčistiť všetko"
+
+msgid "Clear all search filters."
+msgstr "Vymazať všetky filtre vyhľadávania."
 
 msgid "Add New Action"
 msgstr "Pridať Novú Akciu"
@@ -434,11 +498,38 @@ msgstr "Akcia"
 msgid "Deadzone"
 msgstr "Mŕtva zóna"
 
+msgid "Name:"
+msgstr "Názov:"
+
+msgid "Type:"
+msgstr "Typ:"
+
+msgid "Metadata name is valid."
+msgstr "Názov metadát je platný."
+
+msgid "Add Metadata Property for \"%s\""
+msgstr "Pridaj vlastnosť metadát pre \"%s\""
+
+msgid "Metadata name can't be empty."
+msgstr "Názov Metadát nemôže byť prázdny."
+
+msgid "Metadata name must be a valid identifier."
+msgstr "Názov Metadát musí byť platným identifikátorom."
+
+msgid "Metadata with name \"%s\" already exists."
+msgstr "Metadáta s názvom \"%s\" už existujú."
+
+msgid "Names starting with _ are reserved for editor-only metadata."
+msgstr "Názvy začínajúce s _ sú rezervované len pre metadáta editora."
+
 msgid "Time:"
 msgstr "Čas:"
 
 msgid "Value:"
 msgstr "Hodnota:"
+
+msgid "Update Selected Key Handles"
+msgstr "Upraviť vybrané rukoväte kľúčov"
 
 msgid "Insert Key Here"
 msgstr "Tu vložte kľúč"
@@ -446,8 +537,35 @@ msgstr "Tu vložte kľúč"
 msgid "Duplicate Selected Key(s)"
 msgstr "Duplikovať kľúč(e)"
 
+msgid "Cut Selected Key(s)"
+msgstr "Vystrihnúť označené kľúč(e)"
+
+msgid "Copy Selected Key(s)"
+msgstr "Kopírovať označené kľúč(e)"
+
+msgid "Paste Key(s)"
+msgstr "Prilepiť Kľúč(e)"
+
 msgid "Delete Selected Key(s)"
 msgstr "Zmazať označené kľúč(e)"
+
+msgid "Make Handles Free"
+msgstr "Uvoľniť rukoväte"
+
+msgid "Make Handles Linear"
+msgstr "Spraviť rukoväte lineárne"
+
+msgid "Make Handles Balanced"
+msgstr "Spraviť rukoväte balancované"
+
+msgid "Make Handles Mirrored"
+msgstr "Urobiť úchytky zrkadlené"
+
+msgid "Make Handles Balanced (Auto Tangent)"
+msgstr "Urobiť úchytky vyvážené (automatická dotyčnica)"
+
+msgid "Make Handles Mirrored (Auto Tangent)"
+msgstr "Urobiť úchyty zrkadlené (automatická dotyčnica)"
 
 msgid "Add Bezier Point"
 msgstr "Pridať Bezier bod"
@@ -455,11 +573,35 @@ msgstr "Pridať Bezier bod"
 msgid "Move Bezier Points"
 msgstr "Presunúť Bazier Points"
 
+msgid "Animation Duplicate Keys"
+msgstr "Animácia: Duplikovať kľúče"
+
+msgid "Animation Cut Keys"
+msgstr "Animácia: Vystrihnúť kľúče"
+
+msgid "Animation Paste Keys"
+msgstr "Animácia: Vložiť kľúče"
+
+msgid "Animation Delete Keys"
+msgstr "Animácia: Zmazať kľúče"
+
+msgid "Focus"
+msgstr "Zamerať"
+
 msgid "Select All Keys"
 msgstr "Vybrať Všetky Kľúče"
 
 msgid "Deselect All Keys"
 msgstr "Odobrať Všetky Kľúče"
+
+msgid "Animation Change Transition"
+msgstr "Animácia: Zmeniť prechod"
+
+msgid "Animation Change Position3D"
+msgstr "Animácia Zmeniť Pozíciu3D"
+
+msgid "Animation Change Rotation3D"
+msgstr "Animácia: Zmena 3D Rotácie"
 
 msgid "Change Animation Length"
 msgstr "Zmeniť Dĺžku Animácie (Change Animation Length)"
@@ -467,37 +609,17 @@ msgstr "Zmeniť Dĺžku Animácie (Change Animation Length)"
 msgid "Change Animation Loop"
 msgstr "Zmeniť Opakovanie Animácie"
 
-msgid "Can't change loop mode on animation instanced from imported scene."
-msgstr ""
-"Nie je možné zmeniť mód cyklenia v animácií, inštanciovanej v importovanej "
-"scéne."
+msgid "Property Track..."
+msgstr "Stopa vlastnosti..."
 
-msgid "Property Track"
-msgstr "Stopa vlastnosti"
+msgid "3D Position Track..."
+msgstr "Stopa 3D pozície..."
 
-msgid "3D Position Track"
-msgstr "Stopa 3D pozície"
+msgid "3D Rotation Track..."
+msgstr "Stopa 3D rotácie..."
 
-msgid "3D Rotation Track"
-msgstr "Stopa 3D rotácie"
-
-msgid "3D Scale Track"
-msgstr "Stopa 3D škálovania"
-
-msgid "Blend Shape Track"
-msgstr "Stopa prelínania tvarov"
-
-msgid "Call Method Track"
-msgstr "Stopa volania metódy"
-
-msgid "Bezier Curve Track"
-msgstr "Stopa Bézierovej krivky"
-
-msgid "Audio Playback Track"
-msgstr "Stopa Prehrávania zvuku"
-
-msgid "Animation Playback Track"
-msgstr "Stopa Prehrávania animácie"
+msgid "3D Scale Track..."
+msgstr "Stopa 3D škálovania..."
 
 msgid "Animation length (frames)"
 msgstr "Dĺžka animácie (v snímkoch)"
@@ -553,11 +675,20 @@ msgstr "Rotácia:"
 msgid "Scale:"
 msgstr "Veľkosť:"
 
-msgid "Type:"
-msgstr "Typ:"
-
 msgid "(Invalid, expected type: %s)"
 msgstr "(Neplatné, očakávaný typ: %s)"
+
+msgid "Easing:"
+msgstr "Vyhladenie:"
+
+msgid "Handle mode: Free\n"
+msgstr "Režim prichytenia: Voľný\n"
+
+msgid "Handle mode: Linear\n"
+msgstr "Režim prichytenia: Lineárny\n"
+
+msgid "Handle mode: Balanced\n"
+msgstr "Režim prichytenia: Vyvážený\n"
 
 msgid "Toggle Track Enabled"
 msgstr "Zmena Tracku Povolená"
@@ -585,9 +716,6 @@ msgstr "Clamp Loop Interp"
 
 msgid "Wrap Loop Interp"
 msgstr "Wrap Loop Interp"
-
-msgid "Insert Key"
-msgstr "Vložiť Kľúč"
 
 msgid "Duplicate Key(s)"
 msgstr "Duplikovanie Kľúčov"
@@ -660,9 +788,6 @@ msgstr "Cesta Track-u je neplatná, takže sa nedá pridať kľúč."
 msgid "Track is not of type Node3D, can't insert key"
 msgstr "Track nie je typu Node3D, nedá sa vložiť kľúč"
 
-msgid "Add Track Key"
-msgstr "Pridať Track Key"
-
 msgid "Track path is invalid, so can't add a method key."
 msgstr "Cesta track-u je neplatná, takže sa nedá pridať do method key."
 
@@ -684,10 +809,6 @@ msgstr "Audio"
 msgid "Paste Tracks"
 msgstr "Vložiť Track-y"
 
-msgid ""
-"This option does not work for Bezier editing, as it's only a single track."
-msgstr "Táto možnosť nefunguje pre Bezier editovanie, lebo je to jeden track."
-
 msgid "Select an AnimationPlayer node to create and edit animations."
 msgstr "Označte AnimationPlayer node, aby ste vytvorili a upravili animácie."
 
@@ -703,9 +824,6 @@ msgstr "Zobraziť iba tracky z nodov označené v strome."
 msgid "Group tracks by node or display them as plain list."
 msgstr "Zoskupiť tracky podľa nodov alebo ich zobraziť ako čistý zoznam."
 
-msgid "Snap:"
-msgstr "Prichytiť:"
-
 msgid "Animation step value."
 msgstr "Hodnota kroku Animácie."
 
@@ -720,21 +838,6 @@ msgstr "Upraviť"
 
 msgid "Animation properties."
 msgstr "Vlastnosti Animácie."
-
-msgid "Copy Tracks"
-msgstr "Kopírovať track-y"
-
-msgid "Scale Selection"
-msgstr "Zmeniť veľkosť výberu"
-
-msgid "Scale From Cursor"
-msgstr "Zmeniť veľkosť od kurzora"
-
-msgid "Duplicate Selection"
-msgstr "Duplikovať výber"
-
-msgid "Duplicate Transposed"
-msgstr "Duplikovanie transponovaných"
 
 msgid "Delete Selection"
 msgstr "Vymazať výber"
@@ -838,6 +941,12 @@ msgstr "Vybrať Track-y na skopírovanie"
 msgid "Select All/None"
 msgstr "Vybrať všetko/nič"
 
+msgid "Close"
+msgstr "Zatvoriť"
+
+msgid "Error!"
+msgstr "Chyba!"
+
 msgid "Add Audio Track Clip"
 msgstr "Pridať Audio Track Clip"
 
@@ -885,6 +994,9 @@ msgstr "Nahradiť Všetko"
 
 msgid "Selection Only"
 msgstr "Iba Výber"
+
+msgid "Hide"
+msgstr "Skryť"
 
 msgid "Toggle Scripts Panel"
 msgstr "Vypnúť Panel Script-ov"
@@ -984,20 +1096,8 @@ msgstr "Odpojí signál po jeho prvej emisii."
 msgid "Cannot connect signal"
 msgstr "Nedá sa pripojiť signál"
 
-msgid "Close"
-msgstr "Zatvoriť"
-
 msgid "Connect"
 msgstr "Pripojiť"
-
-msgid "Class:"
-msgstr "Trieda:"
-
-msgid "Signal:"
-msgstr "Signál:"
-
-msgid "No description."
-msgstr "Žiadny popis."
 
 msgid "Connect '%s' to '%s'"
 msgstr "Pripojiť '%s' k '%s'"
@@ -1065,9 +1165,6 @@ msgstr "Táto trieda je označená ako zastaraná."
 msgid "This class is marked as experimental."
 msgstr "Táto trieda je označená ako experimentálna."
 
-msgid "No description available for %s."
-msgstr "Nie je dostupný žiadny popis pre %s."
-
 msgid "Favorites:"
 msgstr "Obľúbené:"
 
@@ -1110,6 +1207,9 @@ msgstr ""
 msgid "Toggle Visibility"
 msgstr "Prepnúť viditeľnosť"
 
+msgid "Clear"
+msgstr "Vyčistiť"
+
 msgid "Updating assets on target device:"
 msgstr "Aktualizácia assetov na cieľovom zariadení:"
 
@@ -1148,9 +1248,6 @@ msgstr "Stop"
 
 msgid "Start"
 msgstr "Štart"
-
-msgid "Clear"
-msgstr "Vyčistiť"
 
 msgid "Measure:"
 msgstr "Opatrenia:"
@@ -1211,9 +1308,6 @@ msgstr "Vykonávanie obnovené."
 
 msgid "Bytes:"
 msgstr "Bajty:"
-
-msgid "Warning:"
-msgstr "Varovanie:"
 
 msgid "Error:"
 msgstr "Chyba:"
@@ -1452,23 +1546,11 @@ msgstr "Priečinok s takýmto menom už existuje."
 msgid "Using slashes in folder names will create subfolders recursively."
 msgstr "Použitie lomiek v názvoch priečinkov vytvorí podpriečinky rekurzívne."
 
-msgid "Could not create folder."
-msgstr "Priečinok sa nepodarilo vytvoriť."
-
-msgid "Create new folder in %s:"
-msgstr "Vytvoriť nový priečinok v %s:"
-
-msgid "Create Folder"
-msgstr "Vytvoriť adresár"
-
 msgid "Folder name is valid."
 msgstr "Názov priečinku je platný."
 
 msgid "Thanks from the Godot community!"
 msgstr "Vďaka z Godot komunity!"
-
-msgid "Click to copy."
-msgstr "Klikni na skopírovanie."
 
 msgid "Godot Engine contributors"
 msgstr "Godot Engine prispievatelia"
@@ -1497,21 +1579,6 @@ msgstr "Zlatý Sponzori"
 
 msgid "Silver Sponsors"
 msgstr "Strieborný Sponzori"
-
-msgid "Bronze Sponsors"
-msgstr "Bronzový Sponzori"
-
-msgid "Mini Sponsors"
-msgstr "Malý Sponzori"
-
-msgid "Gold Donors"
-msgstr "Zlatý Darcovia"
-
-msgid "Silver Donors"
-msgstr "Strieborný Darcovia"
-
-msgid "Bronze Donors"
-msgstr "Bronzový Darcovia"
 
 msgid "Donors"
 msgstr "Darcovia"
@@ -1556,9 +1623,6 @@ msgstr "Nasledovné súbory sa nepodarilo extrahovať z assetu \"%s\":"
 
 msgid "(and %s more files)"
 msgstr "(a %s ďalších súborov)"
-
-msgid "Asset \"%s\" installed successfully!"
-msgstr "Asset \"%s\" bol úspešne nainštalovaný!"
 
 msgid "Success!"
 msgstr "Úspech!"
@@ -1650,17 +1714,11 @@ msgstr "Lokácia pre Nový Layout..."
 msgid "Open Audio Bus Layout"
 msgstr "Otvoriť Audio Bus Layout"
 
-msgid "There is no '%s' file."
-msgstr "Není tu žiadny '%s' súbor."
+msgid "Error saving file: %s"
+msgstr "Chyba uloženia súbora: %s"
 
 msgid "Layout:"
 msgstr "Rozloženie:"
-
-msgid "Invalid file, not an audio bus layout."
-msgstr "Neplatný súbor, není audio bus layout."
-
-msgid "Error saving file: %s"
-msgstr "Chyba uloženia súbora: %s"
 
 msgid "Add Bus"
 msgstr "Pridať Bus"
@@ -1691,30 +1749,6 @@ msgstr "Vytvoriť nový Bus Layout."
 
 msgid "Audio Bus Layout"
 msgstr "Audio Bus Rozloženie"
-
-msgid "Invalid name."
-msgstr "Neplatný Názov."
-
-msgid "Cannot begin with a digit."
-msgstr "Nemôže začínať číslicou."
-
-msgid "Valid characters:"
-msgstr "Platné písmená:"
-
-msgid "Must not collide with an existing engine class name."
-msgstr "Nesmie kolidovať s existujúcim názvom engine triedy."
-
-msgid "Must not collide with an existing global script class name."
-msgstr "Nesmie kolidovať s existujúcim názvom globálnej skriptovej triedy."
-
-msgid "Must not collide with an existing built-in type name."
-msgstr "Nesmie kolidovať s existujúcim názvom pre vstavaný typ."
-
-msgid "Must not collide with an existing global constant name."
-msgstr "Nesmie kolidovať s existujúcim názvom pre globálnu konštantu."
-
-msgid "Keyword cannot be used as an Autoload name."
-msgstr "Kľúčové slovo nemôže byť použité ako Autoload názov."
 
 msgid "Autoload '%s' already exists!"
 msgstr "Autoload '%s' už existujuje!"
@@ -1751,9 +1785,6 @@ msgstr "Pridať Autoload"
 
 msgid "Path:"
 msgstr "Cesta:"
-
-msgid "Set path or press \"%s\" to create a script."
-msgstr "Pre vytvorenie skriptu vyber cestu alebo stlač \"%s\"."
 
 msgid "Node Name:"
 msgstr "Názov Nodu:"
@@ -1893,23 +1924,14 @@ msgstr "Detegovať z Projektu"
 msgid "Actions:"
 msgstr "Akcie:"
 
-msgid "Configure Engine Build Profile:"
-msgstr "Konfigurujte Profil Engine Stavby:"
-
 msgid "Please Confirm:"
 msgstr "Prosím Potvrďte:"
-
-msgid "Engine Build Profile"
-msgstr "Profil Engine Stavby"
 
 msgid "Load Profile"
 msgstr "Načítať Profil"
 
 msgid "Export Profile"
 msgstr "Exportovať Profil"
-
-msgid "Edit Build Configuration Profile"
-msgstr "Upraviť Profil Konfigurácie Stavby"
 
 msgid "Filter Commands"
 msgstr "Filtrovať Príkazy"
@@ -1931,6 +1953,12 @@ msgstr "[prázdne]"
 
 msgid "[unsaved]"
 msgstr "[neuložené]"
+
+msgid "%s - Godot Engine"
+msgstr "%s - Godot Engine"
+
+msgid "Dock Position"
+msgstr "Pozícia Dock-u"
 
 msgid "3D Editor"
 msgstr "3D Editor"
@@ -2073,10 +2101,6 @@ msgstr "Importovať Profil(y)"
 msgid "Manage Editor Feature Profiles"
 msgstr "Spravovať Feature Profily Editora"
 
-msgid "Some extensions need the editor to restart to take effect."
-msgstr ""
-"Niektoré rozšírenia vyžadujú reštartovanie editora, aby nadobudli účinnosť."
-
 msgid "Restart"
 msgstr "Reštartovať"
 
@@ -2099,15 +2123,6 @@ msgstr "(Re)Importovanie Asset-ov"
 msgid "Import resources of type: %s"
 msgstr "Importovať zdrojové súbory typu: %s"
 
-msgid "No return value."
-msgstr "Žiadna návratová hodnota."
-
-msgid "Deprecated"
-msgstr "Zastaraný"
-
-msgid "Experimental"
-msgstr "Experimentálny"
-
 msgid "This method supports a variable number of arguments."
 msgstr "Táto metóda podporuje premenlivý počet argumentov."
 
@@ -2125,29 +2140,44 @@ msgstr ""
 "Táto metóda nepotrebuje inštanciu pre jej volanie.\n"
 "Môže byť volaná priamo použitím názvu triedy."
 
+msgid "No return value."
+msgstr "Žiadna návratová hodnota."
+
+msgid "Deprecated"
+msgstr "Zastaraný"
+
+msgid "Experimental"
+msgstr "Experimentálny"
+
+msgid "Constructors"
+msgstr "Konštruktory"
+
+msgid "Operators"
+msgstr "Operátory"
+
+msgid "Method Descriptions"
+msgstr "Popisy Metód"
+
+msgid "Constructor Descriptions"
+msgstr "Popisy Konštruktorov"
+
+msgid "Operator Descriptions"
+msgstr "Popisy Operátorov"
+
 msgid "Error codes returned:"
 msgstr "Navrátené kody Chýb:"
 
 msgid "Top"
 msgstr "Top"
 
+msgid "Class:"
+msgstr "Trieda:"
+
 msgid "Inherits:"
 msgstr "Dedí od:"
 
 msgid "Inherited by:"
 msgstr "Zdedené používateľom:"
-
-msgid ""
-"This class is marked as deprecated. It will be removed in future versions."
-msgstr ""
-"Táto trieda je označená ako zastaraná. Bude odstránená v budúcich verziách."
-
-msgid ""
-"This class is marked as experimental. It is subject to likely change or "
-"possible removal in future versions. Use at your own discretion."
-msgstr ""
-"Táto trieda je označená ako experimentálna. Môže byť zmenená, prípadne "
-"odstránená v búducich verziach. Použite podľa vlastného uváženia."
 
 msgid "Description"
 msgstr "Popis"
@@ -2173,12 +2203,6 @@ msgstr "predvolene:"
 
 msgid "property:"
 msgstr "vlastnosť:"
-
-msgid "Constructors"
-msgstr "Konštruktory"
-
-msgid "Operators"
-msgstr "Operátory"
 
 msgid "Theme Properties"
 msgstr "Vlastnosti Motívov"
@@ -2233,17 +2257,35 @@ msgstr ""
 "Aktuálne nie je žiadny popis pre túto vlastnosť. Prosím pomôžte nám jeho "
 "[color=$color][url=$url]príspevkom[/url][/color]!"
 
-msgid "Constructor Descriptions"
-msgstr "Popisy Konštruktorov"
+msgid "Editor"
+msgstr "Editor"
 
-msgid "Method Descriptions"
-msgstr "Popisy Metód"
+msgid "Show in FileSystem"
+msgstr "Ukázať v FileSystéme"
 
-msgid "Operator Descriptions"
-msgstr "Popisy Operátorov"
+msgid "Open in File Manager"
+msgstr "Otvoriť v File Manažérovy"
 
-msgid "%d match."
-msgstr "%d sa zhoduje."
+msgid "Class"
+msgstr "Trieda"
+
+msgid "Constant"
+msgstr "Konštanta"
+
+msgid "Property"
+msgstr "Vlastnosť"
+
+msgid "Theme Property"
+msgstr "Vlastnosť Témy"
+
+msgid "Method"
+msgstr "Metóda"
+
+msgid "Signal"
+msgstr "Signál"
+
+msgid "Annotation"
+msgstr "Anotácia"
 
 msgid "%d matches."
 msgstr "%d zhody."
@@ -2290,38 +2332,11 @@ msgstr "Iba Vlastnosti Témy"
 msgid "Member Type"
 msgstr "Typ Člena"
 
-msgid "(constructors)"
-msgstr "(konštruktory)"
-
-msgid "Class"
-msgstr "Trieda"
-
-msgid "Method"
-msgstr "Metóda"
-
-msgid "Signal"
-msgstr "Signál"
-
-msgid "Annotation"
-msgstr "Anotácia"
-
-msgid "Constant"
-msgstr "Konštanta"
-
-msgid "Property"
-msgstr "Vlastnosť"
-
-msgid "Theme Property"
-msgstr "Vlastnosť Témy"
-
 msgid "This member is marked as deprecated."
 msgstr "Tento člen je označený ako zastaraný."
 
 msgid "This member is marked as experimental."
 msgstr "Tento člen je označený ako experimentálny."
-
-msgid "Property:"
-msgstr "Vlastnosť:"
 
 msgid "Pin Value"
 msgstr "Pripnúť Hodnotu"
@@ -2390,35 +2405,14 @@ msgstr "Nastaviť %s"
 msgid "Remove metadata %s"
 msgstr "Vymazať Metadáta %s"
 
-msgid "Pinned %s"
-msgstr "%s bol Pripnutý"
-
 msgid "Unpinned %s"
 msgstr "%s bol Odopnutý"
 
 msgid "Add metadata %s"
 msgstr "Pridať metadáta %s"
 
-msgid "Metadata name can't be empty."
-msgstr "Názov Metadát nemôže byť prázdny."
-
-msgid "Metadata name must be a valid identifier."
-msgstr "Názov Metadát musí byť platným identifikátorom."
-
-msgid "Metadata with name \"%s\" already exists."
-msgstr "Metadáta s názvom \"%s\" už existujú."
-
-msgid "Names starting with _ are reserved for editor-only metadata."
-msgstr "Názvy začínajúce s _ sú rezervované len pre metadáta editora."
-
-msgid "Name:"
-msgstr "Názov:"
-
-msgid "Metadata name is valid."
-msgstr "Názov metadát je platný."
-
-msgid "Add Metadata Property for \"%s\""
-msgstr "Pridaj vlastnosť metadát pre \"%s\""
+msgid "Favorites"
+msgstr "Obľúbené"
 
 msgid "Copy Value"
 msgstr "Kopírovať Hodnotu"
@@ -2534,14 +2528,8 @@ msgstr ""
 msgid "Spins when the editor window redraws."
 msgstr "Otáča sa, keď sa okno editora redistribuuje."
 
-msgid "Imported resources can't be saved."
-msgstr "Importované zdroje nemôžu byť uložené."
-
 msgid "OK"
 msgstr "OK"
-
-msgid "Error saving resource!"
-msgstr "Chyba pri ukladaní prostriedku!"
 
 msgid ""
 "This resource can't be saved because it does not belong to the edited scene. "
@@ -2560,30 +2548,6 @@ msgstr ""
 msgid "Save Resource As..."
 msgstr "Uložiť Prostriedok Ako..."
 
-msgid "Can't open file for writing:"
-msgstr "Nie je možné otvoriť súbor pre písanie:"
-
-msgid "Requested file format unknown:"
-msgstr "Požadovaný formát súboru je neznámy:"
-
-msgid "Error while saving."
-msgstr "Chyba pri ukladaní."
-
-msgid "Can't open file '%s'. The file could have been moved or deleted."
-msgstr "Nedá sa otvoriť súbor '%s'. Súbor mohol byť presunutý alebo vymazaný."
-
-msgid "Error while parsing file '%s'."
-msgstr "Chyba pri analýze súboru '%s'."
-
-msgid "Scene file '%s' appears to be invalid/corrupt."
-msgstr "Súbor scény '%s' vyzerá byť neplatný/poškodený."
-
-msgid "Missing file '%s' or one of its dependencies."
-msgstr "Chýba súbor '%s' alebo jedna z jeho závislosti."
-
-msgid "Error while loading file '%s'."
-msgstr "Chyba počas načítavania súboru '%s'."
-
 msgid "Saving Scene"
 msgstr "Ukladanie Scény"
 
@@ -2593,21 +2557,8 @@ msgstr "Analyzovanie"
 msgid "Creating Thumbnail"
 msgstr "Vytváranie Miniatúry"
 
-msgid "This operation can't be done without a tree root."
-msgstr "Túto operáciu nie je možné vykonať bez tree root-u."
-
-msgid ""
-"Couldn't save scene. Likely dependencies (instances or inheritance) couldn't "
-"be satisfied."
-msgstr ""
-"Nedá sa uložiť scéna. Pravdepodobne (inštancie alebo dedičstvo) nemôžu byť "
-"uspokojené."
-
 msgid "Save scene before running..."
 msgstr "Uložiť scénu pred spustením..."
-
-msgid "Could not save one or more scenes!"
-msgstr "Nepodarilo sa uložiť jednu alebo viacero scén!"
 
 msgid "Save All Scenes"
 msgstr "Uložiť Všetky Scény"
@@ -2615,11 +2566,8 @@ msgstr "Uložiť Všetky Scény"
 msgid "Can't overwrite scene that is still open!"
 msgstr "Nedá sa prepísať scénu, ktorá je stále otvorená!"
 
-msgid "Can't load MeshLibrary for merging!"
-msgstr "Nedá sa načítať MeshLibrary pre zlúčenie!"
-
-msgid "Error saving MeshLibrary!"
-msgstr "Chyba pri ukladaní MeshLibrary!"
+msgid "Merge With Existing"
+msgstr "Zlúčiť s existujúcim"
 
 msgid ""
 "An error occurred while trying to save the editor layout.\n"
@@ -2681,33 +2629,11 @@ msgstr ""
 "Prosím prečítajte si dokumentáciu na importovanie scén, aby ste tomu viac "
 "pochopili."
 
-msgid "Changes may be lost!"
-msgstr "Zmeny môžu byť stratené!"
-
 msgid "This object is read-only."
 msgstr "Tento objekt je iba na čítanie."
 
 msgid "Open Base Scene"
 msgstr "Otvoriť Základnú Scénu"
-
-msgid "Quick Open..."
-msgstr "Rýchle Otvorenie..."
-
-msgid "Quick Open Scene..."
-msgstr "Rýchle Otvorenie Scény..."
-
-msgid "Quick Open Script..."
-msgstr "Rýchle Otvorenie Skriptu..."
-
-msgid "%s no longer exists! Please specify a new save location."
-msgstr "%s už neexistuje! Prosím špecifikujte nové miesto uloženia."
-
-msgid ""
-"The current scene has no root node, but %d modified external resource(s) were "
-"saved anyway."
-msgstr ""
-"Aktuálna scéna nemá koreňový node, ale %d modifikovaných externých zdrojov "
-"bolo napriek tomu uložených."
 
 msgid ""
 "A root node is required to save the scene. You can add a root node using the "
@@ -2718,9 +2644,6 @@ msgstr ""
 
 msgid "Save Scene As..."
 msgstr "Uložiť Scénu Ako..."
-
-msgid "Current scene not saved. Open anyway?"
-msgstr "Aktuálna scéna nebola uložená. Napriek tomu otvoriť?"
 
 msgid "Can't undo while mouse buttons are pressed."
 msgstr "Undo nie je možné, pokiaľ sú tlačidlá na myši stlačené."
@@ -2756,24 +2679,11 @@ msgstr ""
 msgid "Save & Quit"
 msgstr "Uložiť & Ukončiť"
 
-msgid "Save changes to the following scene(s) before quitting?"
-msgstr "Uložiť zmeny do nasledujúcich scén pred ukončením?"
-
 msgid "Save changes to the following scene(s) before opening Project Manager?"
 msgstr "Uložiť zmeny nasledujúcich scén pred otvorením Manažéra Projektov?"
 
-msgid ""
-"This option is deprecated. Situations where refresh must be forced are now "
-"considered a bug. Please report."
-msgstr ""
-"Táto možnosť je zastaraná. Situácie, v ktorých je potrebné obnovenie, sa "
-"teraz považujú za chybu. Prosím, nahláste."
-
 msgid "Pick a Main Scene"
 msgstr "Vyberte hlavnú scénu"
-
-msgid "This operation can't be done without a scene."
-msgstr "Táto operácia nemôže byť dokončená bez scény."
 
 msgid "Export Mesh Library"
 msgstr "Exportovať Mesh Knižnicu"
@@ -2798,27 +2708,11 @@ msgstr ""
 "Deaktivujem addon z '%s', aby sa predišlo ďalším chybám."
 
 msgid ""
-"Unable to load addon script from path: '%s' Base type is not EditorPlugin."
-msgstr ""
-"Nepodarilo sa načítať addon script z cesty: '%s' Base type není EditorPlugin."
-
-msgid "Unable to load addon script from path: '%s' Script is not in tool mode."
-msgstr ""
-"Nepodarilo sa načítať addon script z cesty: '%s' Script není v tool móde."
-
-msgid ""
 "Scene '%s' was automatically imported, so it can't be modified.\n"
 "To make changes to it, a new inherited scene can be created."
 msgstr ""
 "Scéna '%s' bola automaticky importovaná, takže nemôže byť modifikovaná.\n"
 "Aby ste v nej mohli spraviť úpravy, môžete vytvoriť novú zdedenú scénu."
-
-msgid ""
-"Error loading scene, it must be inside the project path. Use 'Import' to open "
-"the scene, then save it inside the project path."
-msgstr ""
-"Error pri načítavaní, musí byť vo vnútri projektovej cesty. Použite 'Import' "
-"aby ste otvorili scénu, a potom ju uložte do projektovej cesty."
 
 msgid "Scene '%s' has broken dependencies:"
 msgstr "Scéna '%s' má zničené závislosti:"
@@ -2826,47 +2720,14 @@ msgstr "Scéna '%s' má zničené závislosti:"
 msgid "Clear Recent Scenes"
 msgstr "Vyčistiť Posledné Scény"
 
-msgid "There is no defined scene to run."
-msgstr "Nieje definovaná žiadna scéna na spustenie."
-
-msgid "%s - Godot Engine"
-msgstr "%s - Godot Engine"
-
-msgid ""
-"No main scene has ever been defined, select one?\n"
-"You can change it later in \"Project Settings\" under the 'application' "
-"category."
-msgstr ""
-"Ešte ste nedefinovali hlavnú scénu, chcete nejakú vybrať?\n"
-"Neskôr ju môžete zmeniť v \"Nastaveniach Projektu\" pod kategóriou "
-"'application'."
-
-msgid ""
-"Selected scene '%s' does not exist, select a valid one?\n"
-"You can change it later in \"Project Settings\" under the 'application' "
-"category."
-msgstr ""
-"Vybraná scéna '%s' neexistuje, vybrať platnú?\n"
-"Neskôr ju môžete zmeniť v \"Nastaveniach Projekta\" pod kategóriou "
-"'application'."
-
-msgid ""
-"Selected scene '%s' is not a scene file, select a valid one?\n"
-"You can change it later in \"Project Settings\" under the 'application' "
-"category."
-msgstr ""
-"Vybraná scéna '%s' není scene file, vybrať platnú scénu?\n"
-"Neskôr ju môžete zmeniť v \"Nastaveniach Projekta\" pod kategóriou "
-"'application'."
+msgid "Default"
+msgstr "Predvolené"
 
 msgid "Save Layout"
 msgstr "Uložiť Layout"
 
 msgid "Delete Layout"
 msgstr "Odstrániť Layout"
-
-msgid "Default"
-msgstr "Predvolené"
 
 msgid "Save & Close"
 msgstr "Uložiť & Zatvoriť"
@@ -2886,11 +2747,26 @@ msgstr ""
 "Nie je možné zapisovať do súboru '%s', súbor sa používa, je uzamknutý alebo "
 "chýbajú dostatočné oprávnenia."
 
+msgid "Mobile"
+msgstr "Mobil"
+
+msgid "Compatibility"
+msgstr "Kompatibilita"
+
+msgid "Lock Selected Node(s)"
+msgstr "Zamknúť Vybrané Nody"
+
+msgid "Unlock Selected Node(s)"
+msgstr "Odomknúť Vybrané Nody"
+
+msgid "Group Selected Node(s)"
+msgstr "Zoskupiť Vybrané Nody"
+
+msgid "Ungroup Selected Node(s)"
+msgstr "Odskupiť Vybrané Nody"
+
 msgid "Pan View"
 msgstr "Zobrazenie Pan"
-
-msgid "Dock Position"
-msgstr "Pozícia Dock-u"
 
 msgid "Distraction Free Mode"
 msgstr "Režim bez rozptyľovania"
@@ -2925,6 +2801,15 @@ msgstr "Otvoriť Posledné"
 msgid "Save Scene"
 msgstr "Uložiť Scénu"
 
+msgid "Quick Open..."
+msgstr "Rýchle Otvorenie..."
+
+msgid "Quick Open Scene..."
+msgstr "Rýchle Otvorenie Scény..."
+
+msgid "Quick Open Script..."
+msgstr "Rýchle Otvorenie Skriptu..."
+
 msgid "MeshLibrary..."
 msgstr "MeshLibrary..."
 
@@ -2934,11 +2819,11 @@ msgstr "Zavrieť Scénu"
 msgid "Quit"
 msgstr "Odísť"
 
+msgid "Editor Settings..."
+msgstr "Nastavenia Editora..."
+
 msgid "Project"
 msgstr "Projekt"
-
-msgid "Project Settings..."
-msgstr "Nastavenia Projektu..."
 
 msgid "Project Settings"
 msgstr "Nastavenia projektu"
@@ -2946,14 +2831,8 @@ msgstr "Nastavenia projektu"
 msgid "Version Control"
 msgstr "Kontrola Verzie"
 
-msgid "Export..."
-msgstr "Export..."
-
 msgid "Install Android Build Template..."
 msgstr "Inštalovať Android Build Template..."
-
-msgid "Customize Engine Build Configuration..."
-msgstr "Prispôsobiť konfiguráciu kompilovania Engine-u..."
 
 msgid "Tools"
 msgstr "Nástroje"
@@ -2964,12 +2843,6 @@ msgstr "Orphan Resource Explorer..."
 msgid "Quit to Project List"
 msgstr "Odísť do Listu Projektov"
 
-msgid "Editor"
-msgstr "Editor"
-
-msgid "Editor Settings..."
-msgstr "Nastavenia Editora..."
-
 msgid "Command Palette..."
 msgstr "Panel príkazov..."
 
@@ -2978,9 +2851,6 @@ msgstr "Layout Editora"
 
 msgid "Take Screenshot"
 msgstr "Spraviť Snímku Obrazovky"
-
-msgid "Screenshots are stored in the Editor Data/Settings Folder."
-msgstr "Snímky obrázky sú uložené v Editor Data/Settings Folder."
 
 msgid "Toggle Fullscreen"
 msgstr "Prepnúť na Celú Obrazovku"
@@ -3003,9 +2873,6 @@ msgstr "Spravovať Export Templates..."
 msgid "Help"
 msgstr "Pomoc"
 
-msgid "Questions & Answers"
-msgstr "Otázky & odpovede"
-
 msgid "Community"
 msgstr "Komunita"
 
@@ -3021,23 +2888,11 @@ msgstr "Poslať spätnú väzbu Dokumentácie"
 msgid "Support Godot Development"
 msgstr "Podporte vývoj Godot"
 
-msgid "Choose a renderer."
-msgstr "Zvoliť renderer."
-
-msgid "Mobile"
-msgstr "Mobil"
-
-msgid "Compatibility"
-msgstr "Kompatibilita"
-
 msgid "Update Continuously"
 msgstr "Aktualizovať priebežne"
 
 msgid "Hide Update Spinner"
 msgstr "Skryť aktualizáciu Spinner"
-
-msgid "FileSystem"
-msgstr "FileSystém"
 
 msgid "Inspector"
 msgstr "Inšpektor"
@@ -3048,12 +2903,6 @@ msgstr "Node"
 msgid "History"
 msgstr "História"
 
-msgid "Expand Bottom Panel"
-msgstr "Expandovať Spodný Panel"
-
-msgid "Output"
-msgstr "Výstup"
-
 msgid "Don't Save"
 msgstr "Neukladať"
 
@@ -3062,17 +2911,6 @@ msgstr "Android build template chýba, prosím nainštalujte príslušné šabl�
 
 msgid "Manage Templates"
 msgstr "Spravovať Šablóny"
-
-msgid ""
-"The Android build template is already installed in this project and it won't "
-"be overwritten.\n"
-"Remove the \"res://android/build\" directory manually before attempting this "
-"operation again."
-msgstr ""
-"V tomto projekte už je nainštalovaný Android build template a nemôže byť "
-"prepísaný.\n"
-"Manuálne odstránte \"res://android/build\" predtým ako sa znova pokúsite o "
-"túto operáciu."
 
 msgid "Show in File Manager"
 msgstr "Ukázať v File Manažérovy"
@@ -3086,24 +2924,8 @@ msgstr "Balík Šablón"
 msgid "Export Library"
 msgstr "Exportovať Knižnicu"
 
-msgid "Merge With Existing"
-msgstr "Zlúčiť s existujúcim"
-
 msgid "Open & Run a Script"
 msgstr "Otvoriť a vykonať skript"
-
-msgid ""
-"The following files are newer on disk.\n"
-"What action should be taken?"
-msgstr ""
-"Nasledujúce súbory majú novšiu verziu na disku.\n"
-"Aká akcia sa má vykonať?"
-
-msgid "Reload"
-msgstr "Znovu načítať"
-
-msgid "Resave"
-msgstr "Znovu uložiť"
 
 msgid "New Inherited"
 msgstr "Novo Zdedené"
@@ -3129,20 +2951,8 @@ msgstr "Otvoriť následujúci Editor"
 msgid "Open the previous Editor"
 msgstr "Otvoriť predchádzajúci Editor"
 
-msgid "Ok"
-msgstr "Ok"
-
 msgid "Warning!"
 msgstr "Upozornenie!"
-
-msgid "Main Script:"
-msgstr "Hlavný Script:"
-
-msgid "Edit Plugin"
-msgstr "Editovať Plugin"
-
-msgid "Installed Plugins:"
-msgstr "Nainštalované Plugins:"
 
 msgid "Edit Text:"
 msgstr "Editovať Text:"
@@ -3211,26 +3021,20 @@ msgstr "Vybrať Viewport"
 msgid "Selected node is not a Viewport!"
 msgstr "Vybraný node nie je Viewport!"
 
+msgid "New Key:"
+msgstr "Nový Kľúč:"
+
+msgid "New Value:"
+msgstr "Nová Hodnota:"
+
 msgid "(Nil) %s"
 msgstr "(Nič) %s"
-
-msgid "%s (size %s)"
-msgstr "%s (veľkosť %s)"
 
 msgid "Size:"
 msgstr "Veľkosť:"
 
 msgid "Remove Item"
 msgstr "Vymazať Predmet"
-
-msgid "Dictionary (size %d)"
-msgstr "Slovník (veľkosť %d)"
-
-msgid "New Key:"
-msgstr "Nový Kľúč:"
-
-msgid "New Value:"
-msgstr "Nová Hodnota:"
 
 msgid "Add Key/Value Pair"
 msgstr "Pridať Kľúč/Hodnota \"Pair\""
@@ -3241,26 +3045,20 @@ msgid ""
 msgstr ""
 "Vybraný prostriedok (%s) sa nezhoduje žiadnemu typu pre túto vlastnosť (%s)."
 
-msgid "Quick Load"
-msgstr "Rýchle načítanie"
+msgid "Load..."
+msgstr "Načítať..."
 
 msgid "Make Unique"
 msgstr "Spraviť Jedinečným"
 
-msgid "Show in FileSystem"
-msgstr "Ukázať v FileSystéme"
+msgid "Save As..."
+msgstr "Uložiť Ako..."
 
 msgid "New %s"
 msgstr "Nový %s"
 
-msgid "New Script"
-msgstr "Nový Script"
-
-msgid "Extend Script"
-msgstr "\"Extendovaný\" Script"
-
-msgid "Remote Debug"
-msgstr "Vzdialené Ladenie"
+msgid "New Script..."
+msgstr "Nový Script..."
 
 msgid ""
 "No runnable export preset found for this platform.\n"
@@ -3274,8 +3072,8 @@ msgstr ""
 msgid "Write your logic in the _run() method."
 msgstr "Napíšte svoju logiku v metóde _run()."
 
-msgid "There is an edited scene already."
-msgstr "Už tu je editovaná scéna."
+msgid "None"
+msgstr "Židany"
 
 msgid "Editor Settings"
 msgstr "Nastavenia editoru"
@@ -3355,9 +3153,6 @@ msgstr "Os joypadu %d %s (%s)"
 msgid "Device"
 msgstr "Zariadenie"
 
-msgid "Listening for input..."
-msgstr "Čakám na vstup..."
-
 msgid "Project export for platform:"
 msgstr "Export projektu pre platformu:"
 
@@ -3372,9 +3167,6 @@ msgstr "Zlyhalo."
 
 msgid "Storing File:"
 msgstr "Ukladanie súboru:"
-
-msgid "No export template found at the expected path:"
-msgstr "Na očakávanej ceste sa nenašla žiadna exportná cesta:"
 
 msgid "Could not open file to read from path \"%s\"."
 msgstr "Nepodarilo sa otvoriť súbor na čítanie na ceste \"%s\"."
@@ -3462,38 +3254,23 @@ msgstr ""
 "Nenašli sa žiadne download linky pre túto verziu. Priame stiahnutie je "
 "dostupný iba pre \"official releases\"."
 
-msgid "Disconnected"
-msgstr "Odpojené"
-
-msgid "Resolving"
-msgstr "Riešenie"
-
-msgid "Can't Resolve"
-msgstr "Nepodarilo sa Vyriešiť"
-
 msgid "Connecting..."
 msgstr "Pripájanie..."
 
-msgid "Can't Connect"
-msgstr "Nepodarilo sa pripojiť"
-
-msgid "Connected"
-msgstr "Pripojené"
-
 msgid "Requesting..."
 msgstr "Requestuje sa..."
-
-msgid "Downloading"
-msgstr "Inštalovanie"
-
-msgid "Connection Error"
-msgstr "Chyba pri Pripájaní"
 
 msgid "Extracting Export Templates"
 msgstr "Extrahovanie exportných šablón"
 
 msgid "Importing:"
 msgstr "Importovanie:"
+
+msgid "Export templates are missing. Download them or install from a file."
+msgstr "Chýbajú šablóny pre export. Stiahnite ich alebo nainštalujte zo súboru."
+
+msgid "Official export templates aren't available for development builds."
+msgstr "Oficiálne export šablóny niesu dostupné pre \"development builds\"."
 
 msgid "Uncompressing Android Build Sources"
 msgstr "Nekompresované \"Android Build Sources\""
@@ -3503,9 +3280,6 @@ msgstr "Exportovať Manažera Šablón"
 
 msgid "Current Version:"
 msgstr "Aktuálna Verzia:"
-
-msgid "Export templates are missing. Download them or install from a file."
-msgstr "Chýbajú šablóny pre export. Stiahnite ich alebo nainštalujte zo súboru."
 
 msgid "Export templates are installed and ready to be used."
 msgstr "Export šablóny sú nainštalované a pripravené na použitie."
@@ -3521,9 +3295,6 @@ msgstr "Odinštalovať šablóny pre aktuálnu verziu."
 
 msgid "Download and Install"
 msgstr "Stiahnúť a inštalovať"
-
-msgid "Official export templates aren't available for development builds."
-msgstr "Oficiálne export šablóny niesu dostupné pre \"development builds\"."
 
 msgid "Install templates from a local file."
 msgstr "Inštalácia šablón z lokálneho súboru."
@@ -3552,11 +3323,14 @@ msgstr ""
 "Všetky predvoľby musia mať definovanú exportnú cestu, aby fungovala funkcia "
 "\"Exportovať všetko\"."
 
+msgid "Delete preset '%s'?"
+msgstr "Vymazať predvoľbu '%s'?"
+
 msgid "Resources to export:"
 msgstr "Zdroje k exportu:"
 
-msgid "Delete preset '%s'?"
-msgstr "Vymazať predvoľbu '%s'?"
+msgid "Export With Debug"
+msgstr "Exportovať s ladením"
 
 msgid "%s Export"
 msgstr "Export %s"
@@ -3675,22 +3449,6 @@ msgstr "Exportovacie šablóny pre túto platformu chýbajú:"
 msgid "Manage Export Templates"
 msgstr "Spravovať exportovacie šablóny"
 
-msgid "Export With Debug"
-msgstr "Exportovať s ladením"
-
-msgid ""
-"Canceling this dialog will disable the FBX importer.\n"
-"You can re-enable it in the Project Settings under Filesystem > Import > FBX "
-"> Enabled.\n"
-"\n"
-"The editor will restart as importers are registered when the editor starts."
-msgstr ""
-"Zatvorením tohto vyskakovacieho okna sa vypne FBX importer.\n"
-"Je možné ho zapnúť v nastaveniach projektu pod sekciou Súborovy systém > "
-"Import > FBX > Zapnutý.\n"
-"\n"
-"Editor sa reštartuje, nakoľko importéry sa registrujú keď sa editor spúšťa."
-
 msgid "Path to FBX2glTF executable is empty."
 msgstr "Cesta ku spustiteľnému súboru FBX2glTF je prázdna."
 
@@ -3701,21 +3459,11 @@ msgid "Error executing this file (wrong version or architecture)."
 msgstr ""
 "Chyba pri vykonávaní tohto súboru (nesprávna verzia alebo architektúra)."
 
-msgid ""
-"FBX2glTF is required for importing FBX files.\n"
-"Please download it and provide a valid path to the binary:"
-msgstr ""
-"FBX2glTF je potrebný pre importovanie FBX súborov.\n"
-"Prosím stiahnite a uveďte platnú cestu ku binárnemu súboru:"
-
 msgid "Click this link to download FBX2glTF"
 msgstr "Pre stiahnutie FBX2glTF, kliknite na tento link"
 
 msgid "Browse"
 msgstr "Vyhladať"
-
-msgid "Favorites"
-msgstr "Obľúbené"
 
 msgid "View items as a grid of thumbnails."
 msgstr "Zobraziť veci ako mriežku náhľadov."
@@ -3744,12 +3492,6 @@ msgstr "Chyba pri presúvaní:"
 
 msgid "Error duplicating:"
 msgstr "Chyba pri duplikovaní:"
-
-msgid "Failed to save resource at %s: %s"
-msgstr "Nepodarilo sa uložiť zdrojový súbor na %s: %s"
-
-msgid "Failed to load resource at %s: %s"
-msgstr "Nepodarilo sa načítať zdrojový súbor na %s: %s"
 
 msgid ""
 "This filename begins with a dot rendering the file invisible to the editor.\n"
@@ -3785,11 +3527,11 @@ msgstr "Duplikovanie súborov:"
 msgid "Duplicating folder:"
 msgstr "Duplikovanie priečinka:"
 
+msgid "Create Folder"
+msgstr "Vytvoriť adresár"
+
 msgid "New Inherited Scene"
 msgstr "Nová Zdedená Scéna"
-
-msgid "Set As Main Scene"
-msgstr "Nastaviť ako Hlavnú Scénu"
 
 msgid "Open Scenes"
 msgstr "Otvoriť Scény"
@@ -3812,17 +3554,11 @@ msgstr "Odstrániť z Obľúbených"
 msgid "Reimport"
 msgstr "Reimportovať"
 
-msgid "Open in File Manager"
-msgstr "Otvoriť v File Manažérovy"
-
 msgid "New Folder..."
 msgstr "Nový Priečinok..."
 
 msgid "New Scene..."
 msgstr "Nová Scéna..."
-
-msgid "New Script..."
-msgstr "Nový Script..."
 
 msgid "New Resource..."
 msgstr "Nový Prostriedok..."
@@ -3859,9 +3595,6 @@ msgstr "Premenovať..."
 
 msgid "Re-Scan Filesystem"
 msgstr "Preskenovať Filesystem"
-
-msgid "Toggle Split Mode"
-msgstr "Prepnúť Split Mode"
 
 msgid ""
 "Scanning Files,\n"
@@ -3916,50 +3649,20 @@ msgstr "%d zhôd v %d súbore"
 msgid "%d matches in %d files"
 msgstr "%d zhôd v %d súboroch"
 
+msgid "Rename Group"
+msgstr "Premenovať Skupinu"
+
 msgid "Add to Group"
 msgstr "Pridať do Skupiny"
 
 msgid "Remove from Group"
 msgstr "Vymazať zo Skupiny"
 
-msgid "Invalid group name."
-msgstr "Neplatné meno skupiny."
-
-msgid "Group name already exists."
-msgstr "Meno skupiny už existuje."
-
-msgid "Rename Group"
-msgstr "Premenovať Skupinu"
-
-msgid "Delete Group"
-msgstr "Zmazať Skupinu"
-
-msgid "Groups"
-msgstr "Skupiny"
-
-msgid "Nodes Not in Group"
-msgstr "Nody nenachádzajúce sa v skupine"
-
-msgid "Nodes in Group"
-msgstr "Nody v Skupine"
-
-msgid "Empty groups will be automatically removed."
-msgstr "Prázdne Skupiny budú automaticky zmazané."
-
-msgid "Group Editor"
-msgstr "Editor Skupín"
-
-msgid "Manage Groups"
-msgstr "Spravovať Skupiny"
+msgid "Expand Bottom Panel"
+msgstr "Expandovať Spodný Panel"
 
 msgid "Move"
 msgstr "Presunúť"
-
-msgid "Please select a base directory first."
-msgstr "Najprv vyberte základný adresár."
-
-msgid "Choose a Directory"
-msgstr "Vyberte adresár"
 
 msgid "Network"
 msgstr "Sieť"
@@ -3983,12 +3686,6 @@ msgstr ""
 msgid "Select This Folder"
 msgstr "Vybrať Tento Priečinok"
 
-msgid "All Recognized"
-msgstr "Všetko rozpoznané"
-
-msgid "All Files (*)"
-msgstr "Všetky Súbory (*)"
-
 msgid "Open a File"
 msgstr "Otvoriť súbor"
 
@@ -4003,6 +3700,9 @@ msgstr "Otvoriť súbor / priečinok"
 
 msgid "Save a File"
 msgstr "Uložiť súbor"
+
+msgid "Could not create folder."
+msgstr "Priečinok sa nepodarilo vytvoriť."
 
 msgid "Favorited folder does not exist anymore and will be removed."
 msgstr "Obľúbený priečinok už neexistuje a bude odstránený."
@@ -4049,11 +3749,11 @@ msgstr "Obnoviť súbory."
 msgid "(Un)favorite current folder."
 msgstr "(Od)obľúbiť aktuálny priečinok."
 
-msgid "Toggle the visibility of hidden files."
-msgstr "Prepnúť viditeľnosť skrytých súborov."
-
 msgid "Directories & Files:"
 msgstr "Priečinky a Súbory:"
+
+msgid "Toggle the visibility of hidden files."
+msgstr "Prepnúť viditeľnosť skrytých súborov."
 
 msgid "Preview:"
 msgstr "Predzobraziť:"
@@ -4075,26 +3775,6 @@ msgstr "Spustiť vlastnú scénu."
 
 msgid "Reload the played scene."
 msgstr "Znovu načítať hranú scénu."
-
-msgid "Quick Run Scene..."
-msgstr "Rýchle Spustenie Scény..."
-
-msgid ""
-"Movie Maker mode is enabled, but no movie file path has been specified.\n"
-"A default movie file path can be specified in the project settings under the "
-"Editor > Movie Writer category.\n"
-"Alternatively, for running single scenes, a `movie_file` string metadata can "
-"be added to the root node,\n"
-"specifying the path to a movie file that will be used when recording that "
-"scene."
-msgstr ""
-"Mód tvorenia filmov je zapnutý, ale žiadna cesta k filmovému súboru nebola "
-"špecifikovaná.\n"
-"Predvolenú cestu k filmovému súboru je možné špecifikovať v projektových "
-"nastaveniach pod Editor > Movie Writer.\n"
-"Alternatívne, pre spustené samostatné scény, textové metadáta "
-"`movie_file`môžu byť pridané do koreňového nodu,\n"
-"špecifikujúc cestu k filmovému súboru, ktorý bude použitý pri nahrávaní scény."
 
 msgid "Run the project's default scene."
 msgstr "Spustiť predvolenú scénu projektu."
@@ -4166,15 +3846,6 @@ msgstr "(Pripájanie z)"
 msgid "Node configuration warning:"
 msgstr "Varovanie konfigurácie nodu:"
 
-msgid ""
-"This node can be accessed from within anywhere in the scene by preceding it "
-"with the '%s' prefix in a node path.\n"
-"Click to disable this."
-msgstr ""
-"Tento node môže byť pristupovaný z hocikadiaľ v scéne pridaním prefixu '%s' v "
-"ceste nodu.\n"
-"Vypnite kliknutím."
-
 msgid "Node has one connection."
 msgid_plural "Node has {num} connections."
 msgstr[0] "Node má jedno spojenie."
@@ -4197,8 +3868,8 @@ msgstr ""
 msgid "Invalid node name, the following characters are not allowed:"
 msgstr "Neplatný naźov nodu, nasledujúce znaky nie sú povolené:"
 
-msgid "Another node already uses this unique name in the scene."
-msgstr "Iný node už používa tento jedinečný názov v scéne."
+msgid "Enable Scene Unique Name(s)"
+msgstr "Zapnúť Scénovo Jedinečné Názvy"
 
 msgid "Scene Tree (Nodes):"
 msgstr "Strom Scény (Nody):"
@@ -4208,19 +3879,6 @@ msgstr "Upozornenie Konfigurácie Nodu!"
 
 msgid "Select a Node"
 msgstr "Vyberte Node"
-
-msgid "Enable looping."
-msgstr "Zapnúť cyklenie."
-
-msgid "Offset:"
-msgstr "Posun:"
-
-msgid ""
-"Loop offset (from beginning). Note that if BPM is set, this setting will be "
-"ignored."
-msgstr ""
-"Cykliť posun (od začiatku). Pozn: ak BPM je nastavené, tak toto nastavenie "
-"bude ignorované."
 
 msgid "Importing Scene..."
 msgstr "Importujem Scénu..."
@@ -4263,11 +3921,21 @@ msgstr "Nastaviť Cesty Uloženia Anmiácie"
 msgid "Save Extension:"
 msgstr "Uložiť rozšírenie:"
 
+msgid "Enable looping."
+msgstr "Zapnúť cyklenie."
+
+msgid "Offset:"
+msgstr "Posun:"
+
+msgid ""
+"Loop offset (from beginning). Note that if BPM is set, this setting will be "
+"ignored."
+msgstr ""
+"Cykliť posun (od začiatku). Pozn: ak BPM je nastavené, tak toto nastavenie "
+"bude ignorované."
+
 msgid "Importer:"
 msgstr "Importér:"
-
-msgid "Keep File (No Import)"
-msgstr "Ponechať súbor (bez importu)"
 
 msgid "%d Files"
 msgstr "%d Súbory"
@@ -4302,9 +3970,6 @@ msgstr "Načítať existujúci prostriedok z disku a upraviť ho."
 msgid "Save the currently edited resource."
 msgstr "Uložiť aktuálne upravený prostriedok."
 
-msgid "Save As..."
-msgstr "Uložiť Ako..."
-
 msgid "Copy Resource"
 msgstr "Skopírovať Prostriedok"
 
@@ -4323,35 +3988,11 @@ msgstr "Locale"
 msgid "Set %s on %d nodes"
 msgstr "Nastaviť %s na %d nodoch"
 
+msgid "Groups"
+msgstr "Skupiny"
+
 msgid "Select a single node to edit its signals and groups."
 msgstr "Vyberte jeden node pre upravenie jeho signálov a skupín."
-
-msgid "Edit a Plugin"
-msgstr "Upraviť Plugin"
-
-msgid "Create a Plugin"
-msgstr "Vytvoriť Plugin"
-
-msgid "Update"
-msgstr "Update"
-
-msgid "Plugin Name:"
-msgstr "Meno Pluginu:"
-
-msgid "Subfolder:"
-msgstr "Podpriečinok:"
-
-msgid "Author:"
-msgstr "Autor:"
-
-msgid "Version:"
-msgstr "Verzia:"
-
-msgid "Script Name:"
-msgstr "Meno Skriptu:"
-
-msgid "Activate now?"
-msgstr "Aktivovať teraz?"
 
 msgid "Create Polygon"
 msgstr "Vytvoriť Polygon"
@@ -4388,9 +4029,6 @@ msgstr "Pridať Animáciu"
 
 msgid "Add %s"
 msgstr "Pridať %s"
-
-msgid "Load..."
-msgstr "Načítať..."
 
 msgid "Move Node Point"
 msgstr "Presunúť Bod Nodu"
@@ -4546,12 +4184,6 @@ msgstr "Animácia s rovnakým menom už existuje."
 msgid "Load Animation"
 msgstr "Načítať Animáciu"
 
-msgid "Invalid AnimationLibrary file."
-msgstr "Neplátny súbor AnimationLibrary."
-
-msgid "Invalid Animation file."
-msgstr "Meno animácie je vadné."
-
 msgid "Animation Name:"
 msgstr "Meno Animácie:"
 
@@ -4560,18 +4192,6 @@ msgstr "Prilepená Animácia"
 
 msgid "Open in Inspector"
 msgstr "Otvorit v Inšpektor-ovi"
-
-msgid "Paste Animation to Library from clipboard"
-msgstr "Prilepiť Animáciu do Knižnice zo schránky"
-
-msgid "Save animation library to resource on disk"
-msgstr "Uložiť animačnú knižnicu do prostriedku na disku"
-
-msgid "Copy animation to clipboard"
-msgstr "Kopírovať animáciu do schránky"
-
-msgid "Save animation to resource on disk"
-msgstr "Uložiť animáciu do prostriedku na disku"
 
 msgid "Toggle Autoplay"
 msgstr "Prepnúť Autoplay"
@@ -4602,18 +4222,6 @@ msgstr "Blend sa Ďalej Zmenil"
 
 msgid "Change Blend Time"
 msgstr "Zmeniť Blend Time"
-
-msgid "Play selected animation backwards from current pos. (A)"
-msgstr "Spusťiť vybranú animáciu odzadu z aktuálnej pozície. (A)"
-
-msgid "Play selected animation backwards from end. (Shift+A)"
-msgstr "Spustiť vybranú animáciu odzadu z konca. (Shift+A)"
-
-msgid "Play selected animation from start. (Shift+D)"
-msgstr "Spustiť vybranú animáciu od začiatku. (Shift+D)"
-
-msgid "Play selected animation from current pos. (D)"
-msgstr "Spustiť vybranú animáciu z aktuálnej pozície. (D)"
 
 msgid "Animation position (in seconds)."
 msgstr "Pozícia Animácie (v sekundách)."
@@ -4678,17 +4286,14 @@ msgstr "Zahŕňa Gizmos (3D)"
 msgid "Pin AnimationPlayer"
 msgstr "Pripnúť Prehrávač Animácie"
 
-msgid "Error!"
-msgstr "Chyba!"
+msgid "Cross-Animation Blend Times"
+msgstr "Prelínanie časov medzi animáciami"
 
 msgid "Blend Times:"
 msgstr "Prelínanie časov:"
 
 msgid "Next (Auto Queue):"
 msgstr "Ďalej (Automatický Rad):"
-
-msgid "Cross-Animation Blend Times"
-msgstr "Prelínanie časov medzi animáciami"
 
 msgid "Move Node"
 msgstr "Presunúť Node"
@@ -4749,8 +4354,8 @@ msgstr "Prechod:"
 msgid "Play Mode:"
 msgstr "Prehrať Mód:"
 
-msgid "AnimationTree"
-msgstr "AnimačnýStrom"
+msgid "Version:"
+msgstr "Verzia:"
 
 msgid "Contents:"
 msgstr "Obsah:"
@@ -4809,9 +4414,6 @@ msgstr "Zlihalo:"
 msgid "Bad download hash, assuming file has been tampered with."
 msgstr "Zlý download hash, za predpokladu že bolo narábané so súborom."
 
-msgid "Expected:"
-msgstr "Očakávané:"
-
 msgid "Got:"
 msgstr "Má:"
 
@@ -4862,9 +4464,6 @@ msgstr "Licencia (A-Z)"
 
 msgid "License (Z-A)"
 msgstr "Licencia (Z-A)"
-
-msgid "Official"
-msgstr "Oficiálne"
 
 msgid "Testing"
 msgstr "Testovanie"
@@ -4974,20 +4573,11 @@ msgstr "Zmazať Návody"
 msgid "Create Custom Bone2D(s) from Node(s)"
 msgstr "Vytvoriť Vlastnú Bone2D z Nodu/Nodov"
 
+msgid "Cancel Transformation"
+msgstr "Zrušiť Transformáciu"
+
 msgid "Select Mode"
 msgstr "Vybrať Režim"
-
-msgid "Drag: Rotate selected node around pivot."
-msgstr "Potiahnúť: Otáča vybrané nody okolo bodu otáčania."
-
-msgid "Alt+Drag: Move selected node."
-msgstr "Alt+Potiahnutie: Presúva vybraný node."
-
-msgid "Alt+Drag: Scale selected node."
-msgstr "Alt+Potiahnutie: Škáluje vybraný node."
-
-msgid "V: Set selected node's pivot position."
-msgstr "V: Nastaví pozíciu bodu otáčania vybraného nodu."
 
 msgid "Alt+RMB: Show list of all nodes at position clicked, including locked."
 msgstr ""
@@ -5008,9 +4598,6 @@ msgstr "Zmena Veľkosti"
 
 msgid "Show list of selectable nodes at position clicked."
 msgstr "Zobraziť zoznam vyberateľných nodov na klinutej pozícii."
-
-msgid "Click to change object's rotation pivot."
-msgstr "Kliknite pre zmenu rotačného pivota objektu."
 
 msgid "Pan Mode"
 msgstr "Pohyb Mód"
@@ -5045,12 +4632,6 @@ msgstr "Prichytiť Relatívne"
 msgid "Use Pixel Snap"
 msgstr "Použiť Pixelové Prichytávanie"
 
-msgid "Smart Snapping"
-msgstr "Smart Prichytávanie"
-
-msgid "Configure Snap..."
-msgstr "Konfigurovať Prichytávanie..."
-
 msgid "Snap to Parent"
 msgstr "Prichytiť na Rodiča"
 
@@ -5069,29 +4650,17 @@ msgstr "Prichytiť sa na Ostatné Nody"
 msgid "Snap to Guides"
 msgstr "Prichytiť na Návody"
 
+msgid "Smart Snapping"
+msgstr "Smart Prichytávanie"
+
+msgid "Configure Snap..."
+msgstr "Konfigurovať Prichytávanie..."
+
 msgid "Lock selected node, preventing selection and movement."
 msgstr "Zamknúť vybrané nody, zabraní vyberaniu a presúvaniu."
 
-msgid "Lock Selected Node(s)"
-msgstr "Zamknúť Vybrané Nody"
-
 msgid "Unlock selected node, allowing selection and movement."
 msgstr "Odomknúť vybraný node, povolí vyberanie a presúvanie."
-
-msgid "Unlock Selected Node(s)"
-msgstr "Odomknúť Vybrané Nody"
-
-msgid "Make selected node's children not selectable."
-msgstr "Nastaviť deti vybraných nodov ako nevyberateľné."
-
-msgid "Group Selected Node(s)"
-msgstr "Zoskupiť Vybrané Nody"
-
-msgid "Make selected node's children selectable."
-msgstr "Nastaviť deti vybraných nodov ako vyberateľné."
-
-msgid "Ungroup Selected Node(s)"
-msgstr "Odskupiť Vybrané Nody"
 
 msgid "Skeleton Options"
 msgstr "Nastavenia Kostry"
@@ -5110,9 +4679,6 @@ msgstr "Zobraziť"
 
 msgid "Show When Snapping"
 msgstr "Zobraziť Počas Prichytávania"
-
-msgid "Hide"
-msgstr "Skryť"
 
 msgid "Toggle Grid"
 msgstr "Prepnúť Mriežku"
@@ -5135,11 +4701,8 @@ msgstr "Zobraziť Pôvod"
 msgid "Show Viewport"
 msgstr "Zobraziť Výrez"
 
-msgid "Show Group And Lock Icons"
-msgstr "Zobraziť Skupinu a Zamknúť Ikony"
-
-msgid "Show Transformation Gizmos"
-msgstr "Zobraziť Transformačné Gizmá"
+msgid "Gizmos"
+msgstr "Gizmá"
 
 msgid "Center Selection"
 msgstr "Výber Stredu"
@@ -5161,6 +4724,9 @@ msgstr "Veľkostná maska na vkladanie kľúčov."
 
 msgid "Insert keys (based on mask)."
 msgstr "Vkladanie kľúčov (založené na maske)."
+
+msgid "Insert Key"
+msgstr "Vložiť Kľúč"
 
 msgid ""
 "Auto insert keys when objects are translated, rotated or scaled (based on "
@@ -5198,24 +4764,8 @@ msgstr "vydeliť krok mriežky dvomi"
 msgid "Adding %s..."
 msgstr "Pridávanie %s..."
 
-msgid "Drag and drop to add as child of current scene's root node."
-msgstr ""
-"Potiahnite a pustite pre pridanie ako dieťa koreňového nodu aktuálnej scény."
-
-msgid "Hold Shift when dropping to add as sibling of selected node."
-msgstr "Podržte Shift pri púšťani pre pridanie súrodenca vybraného nodu."
-
-msgid "Hold Alt when dropping to add as a different node type."
-msgstr "Podržte Alt pri púšťani pre pridanie iného typu nodu."
-
-msgid "Cannot instantiate multiple nodes without root."
-msgstr "Nie je možné inštanciovať viacero nodov bez koreňa."
-
 msgid "Create Node"
 msgstr "Vytvoriť Node"
-
-msgid "Error instantiating scene from %s"
-msgstr "Chyba pri inštanciovaní scény z %s"
 
 msgid "Change Default Type"
 msgstr "Zmeniť Predvolený Typ"
@@ -5310,33 +4860,6 @@ msgstr "Horizontálne zarovnanie"
 msgid "Vertical alignment"
 msgstr "Vertikálne zarovnanie"
 
-msgid "Load Emission Mask"
-msgstr "Načíť Emisnú Masku"
-
-msgid "CPUParticles2D"
-msgstr "CPUParticles2D"
-
-msgid "Generated Point Count:"
-msgstr "Generovaný Bodový Počet:"
-
-msgid "Emission Mask"
-msgstr "Emisná Maska"
-
-msgid "Solid Pixels"
-msgstr "Pevné Pixely"
-
-msgid "Border Pixels"
-msgstr "Ohraničené Pixely"
-
-msgid "Directed Border Pixels"
-msgstr "Pixely s Priamym Ohraničením"
-
-msgid "CPUParticles3D"
-msgstr "CPUParticles3D"
-
-msgid "Create Emission Points From Node"
-msgstr "Vytvoriť Emisné Body z Nodu"
-
 msgid "Load Curve Preset"
 msgstr "Načítať Predvoľbu Krivky"
 
@@ -5425,20 +4948,6 @@ msgstr ""
 msgid "Visible Navigation"
 msgstr "Viditeľná Navigácia"
 
-msgid ""
-"When this option is enabled, navigation meshes and polygons will be visible "
-"in the running project."
-msgstr ""
-"Keď je táto možnosť zapnutá, navigačné meshe a polygóny budú viditeľné v "
-"bežiacom projekte."
-
-msgid ""
-"When this option is enabled, avoidance objects shapes, radius and velocities "
-"will be visible in the running project."
-msgstr ""
-"Keď je táto možnosť zapnutá, tvary objektov vyhýbania, polomer a rýchlosti "
-"budú viditeľné v bežiacom projekte."
-
 msgid "Synchronize Scene Changes"
 msgstr "Synchronizovať Zmeny Scény"
 
@@ -5470,14 +4979,11 @@ msgstr ""
 msgid "Keep Debug Server Open"
 msgstr "Ponechať Ladiaci Server Otvorený"
 
-msgid "Run Multiple Instances"
-msgstr "Spustiť viacero inštancií"
+msgid "Edit Plugin"
+msgstr "Editovať Plugin"
 
-msgid "Run %d Instance"
-msgid_plural "Run %d Instances"
-msgstr[0] "Spustiť %d inštanciu"
-msgstr[1] "Spustiť %d inštancie"
-msgstr[2] "Spustiť %d inštancií"
+msgid "Installed Plugins:"
+msgstr "Nainštalované Plugins:"
 
 msgid "Size: %s"
 msgstr "Veľkosť: %s"
@@ -5503,9 +5009,6 @@ msgstr "Funkcie (%d z %d nastavené)"
 
 msgid "Add Feature"
 msgstr "Pridať Funkciu"
-
-msgid " - Variation"
-msgstr " - Variácia"
 
 msgid "Unable to preview font"
 msgstr "Nie je možné zobraziť náhľad fontu"
@@ -5537,20 +5040,11 @@ msgstr "Zmeniť Polomer Tvaru Valca"
 msgid "Change Cylinder Shape Height"
 msgstr "Zmeniť Výšku Tvaru Valca"
 
-msgid "Change Fog Volume Size"
-msgstr "Zmeniť Veľkosť Objemu Hmly"
-
-msgid "Change Particles AABB"
-msgstr "Zmeniť Častice AABB"
-
 msgid "Change Radius"
 msgstr "Zmeniť Polomer"
 
 msgid "Change Light Radius"
 msgstr "Zmeniť Polomer Svetla"
-
-msgid "Start Location"
-msgstr "Štartovacia Lokácia"
 
 msgid "End Location"
 msgstr "Konečná Lokácia"
@@ -5560,63 +5054,6 @@ msgstr "Zmeniť Štartovaciu Pozíciu"
 
 msgid "Change End Position"
 msgstr "Zmeniť Končiacu Pozíciu"
-
-msgid "Convert to CPUParticles2D"
-msgstr "Konvertovať na CPUParticles2D"
-
-msgid "Clear Emission Mask"
-msgstr "Zmazať Emisnú Masku"
-
-msgid "GPUParticles2D"
-msgstr "GPUParticles2D"
-
-msgid "Generation Time (sec):"
-msgstr "Čas generovania (sek):"
-
-msgid "The geometry's faces don't contain any area."
-msgstr "Steny geometrie neobsahujú žiadnu oblasť."
-
-msgid "The geometry doesn't contain any faces."
-msgstr "Geometria neobsahuje žiadne steny."
-
-msgid "\"%s\" doesn't inherit from Node3D."
-msgstr "\"%s\" nededí od Node3D."
-
-msgid "\"%s\" doesn't contain geometry."
-msgstr "\"%s\" neobsahuje geometriu."
-
-msgid "\"%s\" doesn't contain face geometry."
-msgstr "\"%s\" neobsahuje geometriu stien."
-
-msgid "Create Emitter"
-msgstr "Vytvoriť Emitter"
-
-msgid "Emission Points:"
-msgstr "Emisné body:"
-
-msgid "Surface Points"
-msgstr "Povrchové body"
-
-msgid "Surface Points+Normal (Directed)"
-msgstr "Povrchové body+Normály (orientované)"
-
-msgid "Volume"
-msgstr "Objem"
-
-msgid "Emission Source:"
-msgstr "Zdroj emisií:"
-
-msgid "Convert to CPUParticles3D"
-msgstr "Konvertovať na CPUParticles3D"
-
-msgid "Generate Visibility AABB"
-msgstr "Generovať viditeľnosť AABB"
-
-msgid "GPUParticles3D"
-msgstr "GPUParticles3D"
-
-msgid "Generate AABB"
-msgstr "Generovať AABB"
 
 msgid "Low"
 msgstr "Nízky"
@@ -5639,37 +5076,23 @@ msgstr "Konfigurovať"
 msgid "Create Occluder Polygon"
 msgstr "Vytvoriť Occluder Polygon"
 
-msgid "Failed creating lightmap images, make sure path is writable."
-msgstr ""
-"Nepodarilo sa vytvoriť lightmap obrázok, uistite sa že či je cesta "
-"zapisovateľná."
-
 msgid "Bake Lightmaps"
 msgstr "Zapiecť Lightmapy"
-
-msgid "Mesh is empty!"
-msgstr "Mesh je prázdny!"
 
 msgid "Couldn't create a Trimesh collision shape."
 msgstr "Nepodarilo sa vytvoriť Trimesh collision shape."
 
-msgid "Create Static Trimesh Body"
-msgstr "Vytvoriť Static Trimesh Telo"
-
-msgid "This doesn't work on scene root!"
-msgstr "Toto nefunguje na koreni scény!"
-
-msgid "Create Trimesh Static Shape"
-msgstr "Vytvoriť Trimesh Static Shape"
-
 msgid "Couldn't create any collision shapes."
 msgstr "Nie je možné vytvoriť žiadne kolízne tvary."
 
-msgid "UV Unwrap failed, mesh may not be manifold?"
-msgstr "Rozbalenie UV zlyhalo, mesh nie je manifold?"
+msgid "Mesh is empty!"
+msgstr "Mesh je prázdny!"
 
 msgid "Unwrap UV2"
 msgstr "Rozbaliť UV2"
+
+msgid "UV Unwrap failed, mesh may not be manifold?"
+msgstr "Rozbalenie UV zlyhalo, mesh nie je manifold?"
 
 msgid "Could not create outline."
 msgstr "Nepodarilo sa vytvoriť obrys."
@@ -5794,18 +5217,6 @@ msgstr "Nastaviť start_position"
 msgid "Set end_position"
 msgstr "Nastaviť end_position"
 
-msgid "Set NavigationObstacle3D Vertices"
-msgstr "Nastaviť NavigationObstacle3D Vrcholy"
-
-msgid "Edit Vertices"
-msgstr "Upraviť Vrcholy"
-
-msgid "Edit Poly"
-msgstr "Upraviť Poly"
-
-msgid "Edit Poly (Remove Point)"
-msgstr "Upraviť Poly (Odstrániť Bod)"
-
 msgid "Create Navigation Polygon"
 msgstr "Vytvoriť Navigačný Polygón"
 
@@ -5856,9 +5267,6 @@ msgstr "Ortogonálny Zozadu"
 
 msgid "Rear Perspective"
 msgstr "Perspektívny Zozadu"
-
-msgid " [auto]"
-msgstr " [auto]"
 
 msgid "X: %s\n"
 msgstr "X: %s\n"
@@ -5911,12 +5319,6 @@ msgstr "Zarovnať Transformáciu s Pohľadom"
 msgid "Align Rotation with View"
 msgstr "Zarovnať Otáčanie s Pohľadom"
 
-msgid "Cannot drag and drop into multiple selected nodes."
-msgstr "Nedá sa ťahať-a-pustiť do viacero vybraných nodov."
-
-msgid "None"
-msgstr "Židany"
-
 msgid "Display Normal"
 msgstr "Zobraiť Normály"
 
@@ -5943,6 +5345,9 @@ msgstr "Zobraziť Prostredie"
 
 msgid "View Gizmos"
 msgstr "Zobraziť Gizmá"
+
+msgid "View Grid"
+msgstr "Zobraziť Mriežku"
 
 msgid "View Information"
 msgstr "Zobraziť Informácie"
@@ -5979,9 +5384,6 @@ msgstr "Uzamknúť Transformáciu na rovinu XZ"
 
 msgid "Lock Transformation to XY plane"
 msgstr "Uzamknúť Transformáciu na rovinu XY"
-
-msgid "Cancel Transformation"
-msgstr "Zrušiť Transformáciu"
 
 msgid "Begin Rotate Transformation"
 msgstr "Začať Transformáciu Otáčania"
@@ -6108,14 +5510,8 @@ msgstr "3 Viewporty (Alt)"
 msgid "4 Viewports"
 msgstr "4 Viewporty"
 
-msgid "Gizmos"
-msgstr "Gizmá"
-
 msgid "View Origin"
 msgstr "Zobraziť Pôvod"
-
-msgid "View Grid"
-msgstr "Zobraziť Mriežku"
 
 msgid "Settings..."
 msgstr "Nastavenia..."
@@ -6134,9 +5530,6 @@ msgstr "Prichytenie Veľkosti (%):"
 
 msgid "Viewport Settings"
 msgstr "Viewport Nastavenia"
-
-msgid "Perspective FOV (deg.):"
-msgstr "Perspektíva FOV (stupne):"
 
 msgid "Rotate (deg.):"
 msgstr "Otáčať (stupne):"
@@ -6234,6 +5627,84 @@ msgstr ""
 "Uistite sa, že sa aspoň jeden MeshInstance3D node nachádza v scéne, ktorej "
 "vizuálne vrstvy su súčasťou vlastnosti OccluderInstance3D Bake Masky."
 
+msgid "Load Emission Mask"
+msgstr "Načíť Emisnú Masku"
+
+msgid "Solid Pixels"
+msgstr "Pevné Pixely"
+
+msgid "Border Pixels"
+msgstr "Ohraničené Pixely"
+
+msgid "Directed Border Pixels"
+msgstr "Pixely s Priamym Ohraničením"
+
+msgid "Emission Mask"
+msgstr "Emisná Maska"
+
+msgid "GPUParticles2D"
+msgstr "GPUParticles2D"
+
+msgid "Convert to CPUParticles2D"
+msgstr "Konvertovať na CPUParticles2D"
+
+msgid "Generation Time (sec):"
+msgstr "Čas generovania (sek):"
+
+msgid "CPUParticles2D"
+msgstr "CPUParticles2D"
+
+msgid "Generate Visibility AABB"
+msgstr "Generovať viditeľnosť AABB"
+
+msgid "\"%s\" doesn't inherit from Node3D."
+msgstr "\"%s\" nededí od Node3D."
+
+msgid "\"%s\" doesn't contain geometry."
+msgstr "\"%s\" neobsahuje geometriu."
+
+msgid "\"%s\" doesn't contain face geometry."
+msgstr "\"%s\" neobsahuje geometriu stien."
+
+msgid "Generate AABB"
+msgstr "Generovať AABB"
+
+msgid "Create Emission Points From Node"
+msgstr "Vytvoriť Emisné Body z Nodu"
+
+msgid "The geometry's faces don't contain any area."
+msgstr "Steny geometrie neobsahujú žiadnu oblasť."
+
+msgid "The geometry doesn't contain any faces."
+msgstr "Geometria neobsahuje žiadne steny."
+
+msgid "Create Emitter"
+msgstr "Vytvoriť Emitter"
+
+msgid "Emission Points:"
+msgstr "Emisné body:"
+
+msgid "Surface Points"
+msgstr "Povrchové body"
+
+msgid "Surface Points+Normal (Directed)"
+msgstr "Povrchové body+Normály (orientované)"
+
+msgid "Volume"
+msgstr "Objem"
+
+msgid "Emission Source:"
+msgstr "Zdroj emisií:"
+
+msgid "GPUParticles3D"
+msgstr "GPUParticles3D"
+
+msgid "Convert to CPUParticles3D"
+msgstr "Konvertovať na CPUParticles3D"
+
+msgid "CPUParticles3D"
+msgstr "CPUParticles3D"
+
 msgid "Remove Point from Curve"
 msgstr "Vymazať Bod z Krivky"
 
@@ -6243,14 +5714,14 @@ msgstr "Vymazať Out-Control z Krivky"
 msgid "Remove In-Control from Curve"
 msgstr "Vymazať In-Control z Krivky"
 
+msgid "Move Point in Curve"
+msgstr "Presunúť Bod v Krivke"
+
 msgid "Add Point to Curve"
 msgstr "Pridať Bod do Krivky"
 
 msgid "Split Curve"
 msgstr "Rozdeliť Krivku"
-
-msgid "Move Point in Curve"
-msgstr "Presunúť Bod v Krivke"
 
 msgid "Move In-Control in Curve"
 msgstr "Presunúť In-Control v Krivke"
@@ -6258,26 +5729,11 @@ msgstr "Presunúť In-Control v Krivke"
 msgid "Move Out-Control in Curve"
 msgstr "Presunúť Out-Control v Krivke"
 
-msgid "Select Points"
-msgstr "Vybrať Body"
-
-msgid "Shift+Drag: Select Control Points"
-msgstr "Shift+Drag: Vybrať Control Body"
-
-msgid "Click: Add Point"
-msgstr "Klik: Pridať Bod"
-
-msgid "Left Click: Split Segment (in curve)"
-msgstr "Ľavý Klik: Rozdeliť Segment (v krivke)"
-
 msgid "Right Click: Delete Point"
 msgstr "Pravý Klik: Vymazať Bod"
 
 msgid "Select Control Points (Shift+Drag)"
 msgstr "Vybrať Control Body (Shift+Drag)"
-
-msgid "Add Point (in empty space)"
-msgstr "Pridať Bod (v prázdnom priestore)"
 
 msgid "Delete Point"
 msgstr "Vymazať Bod"
@@ -6309,19 +5765,33 @@ msgstr "Rozdeliť Segment (v krivke)"
 msgid "Move Joint"
 msgstr "Presunúť Kĺb"
 
+msgid "Edit a Plugin"
+msgstr "Upraviť Plugin"
+
+msgid "Create a Plugin"
+msgstr "Vytvoriť Plugin"
+
+msgid "Plugin Name:"
+msgstr "Meno Pluginu:"
+
+msgid "Subfolder:"
+msgstr "Podpriečinok:"
+
+msgid "Author:"
+msgstr "Autor:"
+
+msgid "Script Name:"
+msgstr "Meno Skriptu:"
+
+msgid "Activate now?"
+msgstr "Aktivovať teraz?"
+
 msgid ""
 "The skeleton property of the Polygon2D does not point to a Skeleton2D node"
 msgstr "Vlastnosť Polygon2D kostry nesmeruje do Skeleton2D nodu"
 
 msgid "Sync Bones"
 msgstr "Synchronizovať Kosti"
-
-msgid ""
-"No texture in this polygon.\n"
-"Set a texture to be able to edit UV."
-msgstr ""
-"Žiadna textúra na tomto polygóne.\n"
-"Nastavte textúru, aby ste mohli upravovať UV."
 
 msgid "Create UV Map"
 msgstr "Vytvoriť UV Mapu"
@@ -6359,29 +5829,17 @@ msgstr "Transformovať Polygón"
 msgid "Paint Bone Weights"
 msgstr "Maľovať Váhu Kostí"
 
-msgid "Open Polygon 2D UV editor."
-msgstr "Otvoriť editor 2D UV Polygónov."
-
-msgid "Polygon 2D UV Editor"
-msgstr "Editor 2D UV Polygónov"
-
-msgid "UV"
-msgstr "UV"
-
 msgid "Points"
 msgstr "Body"
 
 msgid "Polygons"
 msgstr "Polygony"
 
+msgid "UV"
+msgstr "UV"
+
 msgid "Bones"
 msgstr "Kosti"
-
-msgid "Move Points"
-msgstr "Presunúť Body"
-
-msgid "Shift: Move All"
-msgstr "Shift: Presunúť Všetky"
 
 msgid "Move Polygon"
 msgstr "Presunúť Polygón"
@@ -6410,6 +5868,12 @@ msgstr "Povoliť Prichytávanie"
 msgid "Create Polygon3D"
 msgstr "Vytvoriť Polygon3D"
 
+msgid "Edit Poly"
+msgstr "Upraviť Poly"
+
+msgid "Edit Poly (Remove Point)"
+msgstr "Upraviť Poly (Odstrániť Bod)"
+
 msgid "Can't open '%s'. The file could have been moved or deleted."
 msgstr "Nedá sa otvoriť '%s'. Súbor mohol byť presunutý alebo vymazaný."
 
@@ -6419,17 +5883,20 @@ msgstr "Nový textový súbor..."
 msgid "Save File As..."
 msgstr "Uložiť súbor ako..."
 
-msgid "Open..."
-msgstr "Otvoriť..."
-
-msgid "Search"
-msgstr "Vyhľadať"
-
 msgid "Online Docs"
 msgstr "Online Dokumentácie"
 
 msgid "Open Godot online documentation."
 msgstr "Otvoriť online dokumentáciu Godotu."
+
+msgid "Open..."
+msgstr "Otvoriť..."
+
+msgid "Run"
+msgstr "Spustiť"
+
+msgid "Search"
+msgstr "Vyhľadať"
 
 msgid "Standard"
 msgstr "Štandard"
@@ -6444,6 +5911,9 @@ msgstr ""
 
 msgid "Can't drop nodes without an open scene."
 msgstr "Nie je možné pustiť nody bez otvorenej scény."
+
+msgid "Duplicate Selection"
+msgstr "Duplikovať výber"
 
 msgid "Go to Function..."
 msgstr "Prejsť na funkciu..."
@@ -6478,11 +5948,29 @@ msgstr "Naozaj chcete vymazať Animáciu?"
 msgid "Delete Animation"
 msgstr "Vymazať animáciu"
 
+msgid "Play selected animation backwards from current pos. (A)"
+msgstr "Spusťiť vybranú animáciu odzadu z aktuálnej pozície. (A)"
+
+msgid "Play selected animation backwards from end. (Shift+A)"
+msgstr "Spustiť vybranú animáciu odzadu z konca. (Shift+A)"
+
+msgid "Play selected animation from start. (Shift+D)"
+msgstr "Spustiť vybranú animáciu od začiatku. (Shift+D)"
+
+msgid "Play selected animation from current pos. (D)"
+msgstr "Spustiť vybranú animáciu z aktuálnej pozície. (D)"
+
 msgid "Zoom Reset"
 msgstr "Resetovať Priblíženie"
 
 msgid "Size"
 msgstr "Veľkosť"
+
+msgid "Reload"
+msgstr "Znovu načítať"
+
+msgid "Resave"
+msgstr "Znovu uložiť"
 
 msgid "Snap Mode:"
 msgstr "Režim Prichytenia:"
@@ -6551,14 +6039,6 @@ msgid "Invalid PackedScene resource, must have a Control node at its root."
 msgstr ""
 "Neplatný prostriedok PackedScene, musí mať Ovládací node na jeho koreni."
 
-msgid ""
-"The edited TileMap node has no TileSet resource.\n"
-"Create or load a TileSet resource in the Tile Set property in the inspector."
-msgstr ""
-"Upravený TileMap node nemá žiadny prostriedok TileSet.\n"
-"Vytvorte alebo načítajte prostriedok TileSet vo vlastnosti Tile Set v "
-"inšpektore."
-
 msgid "Yes"
 msgstr "Áno"
 
@@ -6588,9 +6068,6 @@ msgstr "Zmeniť veľkosť VisualShader Nodu"
 
 msgid "Add Node to Visual Shader"
 msgstr "Pridať Node do Vizuálneho Shadera"
-
-msgid "Node(s) Moved"
-msgstr "Node/Nody presunuté"
 
 msgid "Convert Constant Node(s) To Parameter(s)"
 msgstr "Konvertovať Konštantné Nody na Parametre"
@@ -6701,8 +6178,9 @@ msgstr "3D vektorová konštanta."
 msgid "4D vector constant."
 msgstr "4D vektorová konštanta."
 
-msgid "Couldn't create folder."
-msgstr "Nepodarilo sa vytvoriť priečinok."
+msgctxt "Application"
+msgid "Project Manager"
+msgstr "Manažér Projektu"
 
 msgid "Couldn't create icon.svg in project path."
 msgstr "Nepodarilo sa vytvoriť icon.svg v ceste projektu."
@@ -6712,16 +6190,6 @@ msgstr "Chyba pri otváraní súboru balíka, nie je vo formáte zip."
 
 msgid "The following files failed extraction from package:"
 msgstr "Nasledovné súbory sa nepodarilo extrahovať z balíka:"
-
-msgid "Package installed successfully!"
-msgstr "Balík bol úspešne nainštalovaný!"
-
-msgctxt "Application"
-msgid "Project Manager"
-msgstr "Manažér Projektu"
-
-msgid "About"
-msgstr "O nás"
 
 msgid "Add Project Setting"
 msgstr "Pridať nastavenie projektu"
@@ -6775,18 +6243,15 @@ msgstr "Názov scény je platný."
 msgid "Root node valid."
 msgstr "Koreňový node je platný."
 
+msgid "Error instantiating scene from %s"
+msgstr "Chyba pri inštanciovaní scény z %s"
+
 msgid ""
 "Cannot instantiate the scene '%s' because the current scene exists within one "
 "of its nodes."
 msgstr ""
 "Nedá sa inštanciovať scéna '%s', pretože aktuálna scéna existuje v jednej z "
 "jej nodov."
-
-msgid "Move Node In Parent"
-msgstr "Presunúť Node v Rodičovi"
-
-msgid "Move Nodes In Parent"
-msgstr "Presunúť Nody v Rodičovi"
 
 msgid "Duplicate Node(s)"
 msgstr "Duplikovať Nody"
@@ -6801,9 +6266,6 @@ msgstr "Node musí patriť do upravovanej scény, aby sa stal koreňom."
 
 msgid "Make node as Root"
 msgstr "Spraviť node koreňom"
-
-msgid "Delete %d nodes and any children?"
-msgstr "Vymazať %d nody a niektoré deti?"
 
 msgid "Delete %d nodes?"
 msgstr "Vymazať %d nody?"
@@ -6845,16 +6307,6 @@ msgstr ""
 "Vypnutie \"upravitelna_instancia\" spôsobí návrat všetkých vlastností nodu na "
 "ich predvolené hodnoty."
 
-msgid ""
-"Enabling \"Load As Placeholder\" will disable \"Editable Children\" and cause "
-"all properties of the node to be reverted to their default."
-msgstr ""
-"Zapnutie \"Načítať ako Zástupný symbol\" vypne \"Upraviteľné deti\" a spôsobi "
-"návrat všetkých vlastností nodu na ich predvolené hodnoty."
-
-msgid "Enable Scene Unique Name(s)"
-msgstr "Zapnúť Scénovo Jedinečné Názvy"
-
 msgid "Unique names already used by another node in the scene:"
 msgstr "Jedinečné názvy sú už použité iným nodom v scéne:"
 
@@ -6863,9 +6315,6 @@ msgstr "Vypnúť Scénovo Jedinečné Názvy"
 
 msgid "Create Root Node:"
 msgstr "Vytvoriť Koreňový Node:"
-
-msgid "Switch to Favorite Nodes"
-msgstr "Prepnúť na Obľúbené Nody"
 
 msgid "Other Node"
 msgstr "Ostatné Nody"
@@ -6876,9 +6325,6 @@ msgstr "Nedá sa fungovať na nodoch z cudzej scény!"
 msgid "Can't operate on nodes the current scene inherits from!"
 msgstr "Nedá sa fungovať na nodoch, ktoré aktuálna scéna dedí!"
 
-msgid "Cut Node(s)"
-msgstr "Vystrihnúť Nody"
-
 msgid "Remove Node(s)"
 msgstr "Odstrániť Nody"
 
@@ -6887,9 +6333,6 @@ msgstr "Zmeniť typ nodov"
 
 msgid "This operation requires a single selected node."
 msgstr "Táto operácia vyžaduje jeden vybraný node."
-
-msgid "Revoke Unique Name"
-msgstr "Odvolať Jedinečný Názov"
 
 msgid "Access as Unique Name"
 msgstr "Pristupovať ako Jedinečný Názov"
@@ -6906,9 +6349,6 @@ msgstr ""
 
 msgid "Can't paste root node into the same scene."
 msgstr "Nedá sa vložiť koreňový node do tej istej scény."
-
-msgid "Reparent to New Node"
-msgstr "Znovu spraviť rodičom Novému Nodu"
 
 msgid "Toggle Access as Unique Name"
 msgstr "Prepnúť Pristúpovať ako Jedinečný Názov"
@@ -6956,12 +6396,6 @@ msgstr "Načíta existujúci shader súbor."
 msgid "Will create a new shader file."
 msgstr "Vytvorí nový shader súbor."
 
-msgid "Global shader parameter '%s' already exists'"
-msgstr "Globálny shader parameter '%s' už existuje"
-
-msgid "Invalid type argument to convert(), use TYPE_* constants."
-msgstr "Chybný argument convert(), použite TYPE_* konštanty."
-
 msgid "Class name must be a valid identifier"
 msgstr "Názov triedy musí byť platným identifikátorom"
 
@@ -6979,6 +6413,9 @@ msgstr "Prichádzajúce RPC"
 
 msgid "Outgoing RPC"
 msgstr "Vychádzajúce RPC"
+
+msgid "Config"
+msgstr "Nastavenia"
 
 msgid "Select a replicator node in order to pick a property to add to it."
 msgstr ""
@@ -7019,9 +6456,6 @@ msgstr "Chyba pri načítaní %s: %s."
 msgid "Add an action set."
 msgstr "Pridať set akcii."
 
-msgid "OpenXR Action Map"
-msgstr "Mapa Akcií OpenXR"
-
 msgid "Invalid package name:"
 msgstr "Neplatný názov balíka:"
 
@@ -7030,9 +6464,6 @@ msgstr "Odinštalovanie..."
 
 msgid "Could not install to device: %s"
 msgstr "Nepodarilo sa nainštalovať na zariadenie: %s"
-
-msgid "Signing release %s..."
-msgstr "Podpisujem vydanie %s..."
 
 msgid "Could not start apksigner executable."
 msgstr "Nepodarilo sa spustiť spustiteľný súbor apksigner."
@@ -7049,9 +6480,6 @@ msgstr "Nebolo možné exportovať projektové súbory do gradle projektu."
 
 msgid "Could not write expansion package file!"
 msgstr "Nepodarilo sa zapísať súbor rozšírovacieho balíka!"
-
-msgid "Package not found: \"%s\"."
-msgstr "Balík nebol nájdený: \"%s\"."
 
 msgid "Could not find template APK to export: \"%s\"."
 msgstr "Nepodarilo sa nájsť šablónu APK pre exportovanie: \"%s\"."
@@ -7076,9 +6504,6 @@ msgstr "Štartovanie projektu..."
 
 msgid "Invalid bundle identifier:"
 msgstr "Neplatný identifikátor zväzku:"
-
-msgid "Could not open icon file \"%s\"."
-msgstr "Nedalo sa otvoriť ikonu \"%s\"."
 
 msgid "Could not start rcodesign executable."
 msgstr "Nepodarilo sa spustiť spustiteľný súbor rcodesign."
@@ -7126,64 +6551,6 @@ msgid "Failed to remove temporary file \"%s\"."
 msgstr "Nepodarilo sa vymazať dočasný súbor \"%s\"."
 
 msgid ""
-"This node has no shape, so it can't collide or interact with other objects.\n"
-"Consider adding a CollisionShape2D or CollisionPolygon2D as a child to define "
-"its shape."
-msgstr ""
-"Tento node nemá žiadny tvar, takže nemôže kolidovať alebo interagovať s inými "
-"objektmi.\n"
-"Zvážte pridať CollisionShape2D alebo CollisionPolygon2D ako dieťa pre "
-"definovanie jeho tvaru."
-
-msgid ""
-"CollisionPolygon2D only serves to provide a collision shape to a "
-"CollisionObject2D derived node. Please only use it as a child of Area2D, "
-"StaticBody2D, RigidBody2D, CharacterBody2D, etc. to give them a shape."
-msgstr ""
-"CollisionPolygon2D slúži iba na poskytnutie kolízneho tvaru do "
-"CollisionObject2D odvodeného nodu. Prosím, použite ho iba ako dieťa Area2D, "
-"StaticBody2D, RigidBody2D, CharacterBody2D, atď. aby ste im dali tvar."
-
-msgid "An empty CollisionPolygon2D has no effect on collision."
-msgstr "Prázdny CollisionPolygon2D nemá žiaden efekt na kolíziu."
-
-msgid ""
-"CollisionShape2D only serves to provide a collision shape to a "
-"CollisionObject2D derived node. Please only use it as a child of Area2D, "
-"StaticBody2D, RigidBody2D, CharacterBody2D, etc. to give them a shape."
-msgstr ""
-"CollisionShape2D slúži iba na poskytnutie kolízneho tvaru do "
-"CollisionObject2D odvodeného nodu. Prosím, použite ho iba ako dieťa Area2D, "
-"StaticBody2D, RigidBody2D, CharacterBody2D, atď. aby ste im dali tvar."
-
-msgid ""
-"A shape must be provided for CollisionShape2D to function. Please create a "
-"shape resource for it!"
-msgstr ""
-"Musíte nastaviť tvar objektu CollisionShape2D aby fungoval. Prosím, vytvorte "
-"preň tvarový objekt!"
-
-msgid ""
-"Polygon-based shapes are not meant be used nor edited directly through the "
-"CollisionShape2D node. Please use the CollisionPolygon2D node instead."
-msgstr ""
-"Tvary založenené na polygónoch nie sú určené na použitie alebo upravovanie "
-"priamo cez node CollisionShape2D . Prosím použite namiesto neho node "
-"CollisionPolygon2D."
-
-msgid "Node A and Node B must be PhysicsBody2Ds"
-msgstr "Node A a Node B musia byť PhysicsBody2D"
-
-msgid "Node A must be a PhysicsBody2D"
-msgstr "Node A musí byť PhysicsBody2D"
-
-msgid "Node B must be a PhysicsBody2D"
-msgstr "Node B musí byť PhysicsBody2D"
-
-msgid "Node A and Node B must be different PhysicsBody2Ds"
-msgstr "Noda A a Node B musia byť odlišné PhysicsBody2D"
-
-msgid ""
 "An occluder polygon must be set (or drawn) for this occluder to take effect."
 msgstr ""
 "Okluzorový polygón musí byť nastavený (alebo vykreslený) aby sa okluzor "
@@ -7212,6 +6579,47 @@ msgid "PathFollow2D only works when set as a child of a Path2D node."
 msgstr "PathFollow2D funguje iba keď je nastavený ako dieťa nodu Path2D."
 
 msgid ""
+"This node has no shape, so it can't collide or interact with other objects.\n"
+"Consider adding a CollisionShape2D or CollisionPolygon2D as a child to define "
+"its shape."
+msgstr ""
+"Tento node nemá žiadny tvar, takže nemôže kolidovať alebo interagovať s inými "
+"objektmi.\n"
+"Zvážte pridať CollisionShape2D alebo CollisionPolygon2D ako dieťa pre "
+"definovanie jeho tvaru."
+
+msgid ""
+"CollisionPolygon2D only serves to provide a collision shape to a "
+"CollisionObject2D derived node. Please only use it as a child of Area2D, "
+"StaticBody2D, RigidBody2D, CharacterBody2D, etc. to give them a shape."
+msgstr ""
+"CollisionPolygon2D slúži iba na poskytnutie kolízneho tvaru do "
+"CollisionObject2D odvodeného nodu. Prosím, použite ho iba ako dieťa Area2D, "
+"StaticBody2D, RigidBody2D, CharacterBody2D, atď. aby ste im dali tvar."
+
+msgid "An empty CollisionPolygon2D has no effect on collision."
+msgstr "Prázdny CollisionPolygon2D nemá žiaden efekt na kolíziu."
+
+msgid ""
+"A shape must be provided for CollisionShape2D to function. Please create a "
+"shape resource for it!"
+msgstr ""
+"Musíte nastaviť tvar objektu CollisionShape2D aby fungoval. Prosím, vytvorte "
+"preň tvarový objekt!"
+
+msgid "Node A and Node B must be PhysicsBody2Ds"
+msgstr "Node A a Node B musia byť PhysicsBody2D"
+
+msgid "Node A must be a PhysicsBody2D"
+msgstr "Node A musí byť PhysicsBody2D"
+
+msgid "Node B must be a PhysicsBody2D"
+msgstr "Node B musí byť PhysicsBody2D"
+
+msgid "Node A and Node B must be different PhysicsBody2Ds"
+msgstr "Noda A a Node B musia byť odlišné PhysicsBody2D"
+
+msgid ""
 "A PhysicalBone2D only works with a Skeleton2D or another PhysicalBone2D as a "
 "parent node!"
 msgstr ""
@@ -7233,14 +6641,14 @@ msgstr ""
 "zanechal kosti pripojené! Prosím pridajte node založený na Joint2D ako dieťa "
 "k tomuto nodu!"
 
-msgid "Path property must point to a valid Node2D node to work."
-msgstr "Vlastnosť cesty musí smerovať k platnému nodu Node2D, aby fungoval."
-
 msgid ""
 "This node cannot interact with other objects unless a Shape2D is assigned."
 msgstr ""
 "Tento node nemôže interagovať s inými objektmi, pokiaľ Shape2D nie je "
 "priradený."
+
+msgid "Path property must point to a valid Node2D node to work."
+msgstr "Vlastnosť cesty musí smerovať k platnému nodu Node2D, aby fungoval."
 
 msgid "This Bone2D chain should end at a Skeleton2D node."
 msgstr "Táto Bone2D reťaz by mala končiť so Skeleton2D nodom."
@@ -7283,6 +6691,15 @@ msgid ""
 msgstr ""
 "Node BoneAttachment3D nie je viazaný k žiadnym kostiam! Prosím vyberte kosť "
 "na priloženie do tohto nodu."
+
+msgid ""
+"The NavigationAgent3D can be used only under a Node3D inheriting parent node."
+msgstr ""
+"NavigationAgent3D môže byť použitý iba pod rodičovským nodom, ktorý dedí "
+"Node3D."
+
+msgid "PathFollow3D only works when set as a child of a Path3D node."
+msgstr "PathFollow3D funguje iba keď je dieťaťom Path3D node."
 
 msgid ""
 "This node has no shape, so it can't collide or interact with other objects.\n"
@@ -7361,20 +6778,10 @@ msgid "Node A and Node B must be different PhysicsBody3Ds"
 msgstr "Node A a Node B musia byť rozličné PhysicsBody3D"
 
 msgid ""
-"LightmapGI nodes are not supported when using the GL Compatibility backend "
-"yet. Support will be added in a future release."
+"This node cannot interact with other objects unless a Shape3D is assigned."
 msgstr ""
-"Nody LightmapGI zatiaľ nie sú podporované počas používania backendu GL "
-"Kompatibility. Podpora bude pridaná v budúcich verziách."
-
-msgid ""
-"The NavigationAgent3D can be used only under a Node3D inheriting parent node."
-msgstr ""
-"NavigationAgent3D môže byť použitý iba pod rodičovským nodom, ktorý dedí "
-"Node3D."
-
-msgid "PathFollow3D only works when set as a child of a Path3D node."
-msgstr "PathFollow3D funguje iba keď je dieťaťom Path3D node."
+"Tento node nemôže interagovať s inými objektmi, pokiaľ Shape3D nie je "
+"priradený."
 
 msgid ""
 "The \"Remote Path\" property must point to a valid Node3D or Node3D-derived "
@@ -7384,37 +6791,11 @@ msgstr ""
 "odovodeného nodu, aby fungovala."
 
 msgid ""
-"This node cannot interact with other objects unless a Shape3D is assigned."
-msgstr ""
-"Tento node nemôže interagovať s inými objektmi, pokiaľ Shape3D nie je "
-"priradený."
-
-msgid ""
-"VisibleOnScreenNotifier3D nodes are not supported when using the GL "
-"Compatibility backend yet. Support will be added in a future release."
-msgstr ""
-"Nody VisibleOnScreenNotifier3D zatiaľ nie sú podporované počas používania "
-"backendu GL Kompatibility. Podpora bude pridaná v budúcich verziách."
-
-msgid ""
-"VoxelGI nodes are not supported when using the GL Compatibility backend yet. "
-"Support will be added in a future release."
-msgstr ""
-"Nody VoxelGI zatiaľ nie sú podporované počas používania backendu GL "
-"Kompatibility. Podpora bude pridaná v budúcich verziách."
-
-msgid ""
 "No VoxelGI data set, so this node is disabled. Bake static objects to enable "
 "GI."
 msgstr ""
 "Nie sú nastavené žiadne VoxelGI dáta, takže tento node je vypnutý. Bakenite "
 "statické objekty, aby ste zapli GI."
-
-msgid "XRCamera3D must have an XROrigin3D node as its parent."
-msgstr "XRCamera3D musí mať node XROrigin3D ako jeho rodič."
-
-msgid "XRController3D must have an XROrigin3D node as its parent."
-msgstr "XRController3D musí mať node XROrigin3D ako jeho rodič."
 
 msgid "XROrigin3D requires an XRCamera3D child node."
 msgstr "XROrigin3D potrebuje detský XRCamera3D node."
@@ -7474,15 +6855,6 @@ msgstr ""
 "straty dát."
 
 msgid ""
-"Setting node name '%s' to be unique within scene for '%s', but it's already "
-"claimed by '%s'.\n"
-"'%s' is no longer set as having a unique name."
-msgstr ""
-"Nastavenie názvu nodu '%s', aby bol jedinečným v scéne '%s', ale názov už je "
-"nárokovaný '%s'.\n"
-"'%s' už nie je nastavený ako s jedinečným názvom."
-
-msgid ""
 "This node is marked as deprecated and will be removed in future versions.\n"
 "Please check the Godot documentation for information about migration."
 msgstr ""
@@ -7502,9 +6874,6 @@ msgid ""
 msgstr ""
 "ShaderGlobalsOverride nie je aktívny, pretože iný node rovnakého typu je v "
 "scéne."
-
-msgid "Cannot open font from file: %s."
-msgstr "Nedá sa otvoriť font zo súboru: %s."
 
 msgid ""
 "An incoming node's name clashes with %s already in the scene (presumably, "
@@ -7538,8 +6907,14 @@ msgstr "Neplatný zdroj pre shader."
 msgid "Invalid comparison function for that type."
 msgstr "Neplatná funkcia porovnania pre tento typ."
 
+msgid "Surface Index"
+msgstr "Index povrchu"
+
 msgid "Invalid arguments for the built-in function: \"%s(%s)\"."
 msgstr "Neplatné argumenty pre vstavanú funkciu: \"%s(%s)\"."
+
+msgid "Recursion is not allowed."
+msgstr "Rekurzia nie je povolená."
 
 msgid "Invalid assignment of '%s' to '%s'."
 msgstr "Neplatné priradenie '%s' k '%s'."
@@ -7634,3 +7009,15 @@ msgid ""
 msgstr ""
 "Celková veľkosť %s tohto shader-a na tomto zariadení bola prekročená (%d/%d). "
 "Shader nemusí pracovať správne."
+
+msgid ""
+"You are attempting to assign the VERTEX position in model space to the vertex "
+"POSITION in clip space. The definition of clip space changed in version 4.3, "
+"so if this code was written prior to 4.3, it will not continue to work. "
+"Consider specifying the clip space z-component directly i.e. use `vec4(VERTEX."
+"xy, 1.0, 1.0)`."
+msgstr ""
+"Pokúšate sa priradiť VERTEX pozíciu v model priestore VERTEX pozícií v clip "
+"priestore. Definícia clip priestoru sa zmenila vo verzii 4.3, takže ak bol "
+"tento kód napísaný pred verziou 4.3, nebude naďalej fungovať. Skúste priamo "
+"zadať z-komponent clip priestoru, t. j. použite `vec4(VERTEX.xy, 1.0, 1.0)`."
