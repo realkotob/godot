@@ -32,8 +32,8 @@
 #define ANIMATION_PLAYER_EDITOR_PLUGIN_H
 
 #include "editor/animation_track_editor.h"
-#include "editor/editor_plugin.h"
 #include "editor/plugins/animation_library_editor.h"
+#include "editor/plugins/editor_plugin.h"
 #include "scene/animation/animation_player.h"
 #include "scene/gui/dialogs.h"
 #include "scene/gui/slider.h"
@@ -52,6 +52,7 @@ class AnimationPlayerEditor : public VBoxContainer {
 	AnimationPlayerEditorPlugin *plugin = nullptr;
 	AnimationMixer *original_node = nullptr; // For pinned mark in SceneTree.
 	AnimationPlayer *player = nullptr; // For AnimationPlayerEditor, could be dummy.
+	ObjectID cached_root_node_id;
 	bool is_dummy = false;
 
 	enum {
@@ -111,8 +112,9 @@ class AnimationPlayerEditor : public VBoxContainer {
 	Ref<Texture2D> autoplay_icon;
 	Ref<Texture2D> reset_icon;
 	Ref<ImageTexture> autoplay_reset_icon;
-	bool last_active;
-	float timeline_position;
+
+	bool last_active = false;
+	float timeline_position = 0;
 
 	EditorFileDialog *file = nullptr;
 	ConfirmationDialog *delete_dialog = nullptr;
@@ -127,11 +129,11 @@ class AnimationPlayerEditor : public VBoxContainer {
 	} blend_editor;
 
 	ConfirmationDialog *name_dialog = nullptr;
-	ConfirmationDialog *error_dialog = nullptr;
+	AcceptDialog *error_dialog = nullptr;
 	int name_dialog_op = TOOL_NEW_ANIM;
 
-	bool updating;
-	bool updating_blends;
+	bool updating = false;
+	bool updating_blends = false;
 
 	AnimationTrackEditor *track_editor = nullptr;
 	static AnimationPlayerEditor *singleton;
@@ -177,6 +179,7 @@ class AnimationPlayerEditor : public VBoxContainer {
 
 	void _select_anim_by_name(const String &p_anim);
 	float _get_editor_step() const;
+	void _go_to_nearest_keyframe(bool p_backward);
 	void _play_pressed();
 	void _play_from_pressed();
 	void _play_bw_pressed();
@@ -190,19 +193,22 @@ class AnimationPlayerEditor : public VBoxContainer {
 
 	void _animation_remove();
 	void _animation_remove_confirmed();
-	void _animation_blend();
 	void _animation_edit();
 	void _animation_duplicate();
 	Ref<Animation> _animation_clone(const Ref<Animation> p_anim);
 	void _animation_resource_edit();
 	void _scale_changed(const String &p_scale);
-	void _seek_value_changed(float p_value, bool p_set = false, bool p_timeline_only = false);
+	void _seek_value_changed(float p_value, bool p_timeline_only = false);
 	void _blend_editor_next_changed(const int p_idx);
+
+	void _edit_animation_blend();
+	void _update_animation_blend();
 
 	void _list_changed();
 	void _current_animation_changed(const String &p_name);
 	void _update_animation();
 	void _update_player();
+	void _set_controls_disabled(bool p_disabled);
 	void _update_animation_list_icons();
 	void _update_name_dialog_library_dropdown();
 	void _blend_edited();
@@ -210,8 +216,9 @@ class AnimationPlayerEditor : public VBoxContainer {
 	void _animation_player_changed(Object *p_pl);
 	void _animation_libraries_updated();
 
-	void _animation_key_editor_seek(float p_pos, bool p_drag, bool p_timeline_only = false);
+	void _animation_key_editor_seek(float p_pos, bool p_timeline_only = false, bool p_update_position_only = false);
 	void _animation_key_editor_anim_len_changed(float p_len);
+	void _animation_update_key_frame();
 
 	virtual void shortcut_input(const Ref<InputEvent> &p_ev) override;
 	void _animation_tool_menu(int p_option);
@@ -247,6 +254,7 @@ public:
 	AnimationMixer *get_editing_node() const;
 	AnimationPlayer *get_player() const;
 	AnimationMixer *fetch_mixer_for_library() const;
+	Node *get_cached_root_node() const;
 
 	static AnimationPlayerEditor *get_singleton() { return singleton; }
 
@@ -291,7 +299,7 @@ public:
 	virtual Dictionary get_state() const override { return anim_editor->get_state(); }
 	virtual void set_state(const Dictionary &p_state) override { anim_editor->set_state(p_state); }
 
-	virtual String get_name() const override { return "Anim"; }
+	virtual String get_plugin_name() const override { return "Anim"; }
 	bool has_main_screen() const override { return false; }
 	virtual void edit(Object *p_object) override;
 	virtual bool handles(Object *p_object) const override;
@@ -325,9 +333,35 @@ public:
 	bool has_main_screen() const override { return false; }
 	virtual bool handles(Object *p_object) const override;
 
-	virtual String get_name() const override { return "AnimationTrackKeyEdit"; }
+	virtual String get_plugin_name() const override { return "AnimationTrackKeyEdit"; }
 
 	AnimationTrackKeyEditEditorPlugin();
+};
+
+// AnimationMarkerKeyEditEditorPlugin
+
+class EditorInspectorPluginAnimationMarkerKeyEdit : public EditorInspectorPlugin {
+	GDCLASS(EditorInspectorPluginAnimationMarkerKeyEdit, EditorInspectorPlugin);
+
+	AnimationMarkerKeyEditEditor *amk_editor = nullptr;
+
+public:
+	virtual bool can_handle(Object *p_object) override;
+	virtual void parse_begin(Object *p_object) override;
+};
+
+class AnimationMarkerKeyEditEditorPlugin : public EditorPlugin {
+	GDCLASS(AnimationMarkerKeyEditEditorPlugin, EditorPlugin);
+
+	EditorInspectorPluginAnimationMarkerKeyEdit *amk_plugin = nullptr;
+
+public:
+	bool has_main_screen() const override { return false; }
+	virtual bool handles(Object *p_object) const override;
+
+	virtual String get_plugin_name() const override { return "AnimationMarkerKeyEdit"; }
+
+	AnimationMarkerKeyEditEditorPlugin();
 };
 
 #endif // ANIMATION_PLAYER_EDITOR_PLUGIN_H

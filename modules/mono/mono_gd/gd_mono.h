@@ -64,18 +64,22 @@ class GDMono {
 	bool finalizing_scripts_domain = false;
 
 	void *hostfxr_dll_handle = nullptr;
-	bool is_native_aot = false;
+	void *coreclr_dll_handle = nullptr;
 
 	String project_assembly_path;
 	uint64_t project_assembly_modified_time = 0;
+#ifdef GD_MONO_HOT_RELOAD
 	int project_load_failure_count = 0;
+#endif
 
 #ifdef TOOLS_ENABLED
 	bool _load_project_assembly();
 	void _try_load_project_assembly();
 #endif
 
+#ifdef DEBUG_METHODS_ENABLED
 	uint64_t api_core_hash = 0;
+#endif
 #ifdef TOOLS_ENABLED
 	uint64_t api_editor_hash = 0;
 #endif
@@ -163,17 +167,13 @@ namespace mono_bind {
 class GodotSharp : public Object {
 	GDCLASS(GodotSharp, Object);
 
-	friend class GDMono;
-
-	void _reload_assemblies(bool p_soft_reload);
-	bool _is_runtime_initialized();
-
 protected:
 	static GodotSharp *singleton;
-	static void _bind_methods();
 
 public:
 	static GodotSharp *get_singleton() { return singleton; }
+
+	void reload_assemblies(bool p_soft_reload);
 
 	GodotSharp();
 	~GodotSharp();
