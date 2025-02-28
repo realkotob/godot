@@ -31,8 +31,6 @@
 #ifndef SERVERS_DEBUGGER_H
 #define SERVERS_DEBUGGER_H
 
-#include "core/debugger/debugger_marshalls.h"
-
 #include "servers/rendering_server.h"
 
 class ServersDebugger {
@@ -69,6 +67,7 @@ public:
 		int call_count = 0;
 		double self_time = 0;
 		double total_time = 0;
+		double internal_time = 0;
 	};
 
 	// Servers profiler
