@@ -152,7 +152,7 @@ String realpath(const String &p_path) {
 	}
 
 	return result.simplify_path();
-#elif UNIX_ENABLED
+#elif defined(UNIX_ENABLED)
 	char *resolved_path = ::realpath(p_path.utf8().get_data(), nullptr);
 
 	if (!resolved_path) {
@@ -212,7 +212,7 @@ String relative_to_impl(const String &p_path, const String &p_relative_to) {
 #ifdef WINDOWS_ENABLED
 String get_drive_letter(const String &p_norm_path) {
 	int idx = p_norm_path.find(":/");
-	if (idx != -1 && idx < p_norm_path.find("/")) {
+	if (idx != -1 && idx < p_norm_path.find_char('/')) {
 		return p_norm_path.substr(0, idx + 1);
 	}
 	return String();

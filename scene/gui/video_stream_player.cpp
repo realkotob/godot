@@ -31,8 +31,6 @@
 #include "video_stream_player.h"
 
 #include "core/os/os.h"
-#include "scene/resources/image_texture.h"
-#include "scene/scene_string_names.h"
 #include "servers/audio_server.h"
 
 int VideoStreamPlayer::sp_get_channel_count() const {
@@ -83,10 +81,10 @@ void VideoStreamPlayer::_mix_audios(void *p_self) {
 
 // Called from audio thread
 void VideoStreamPlayer::_mix_audio() {
-	if (!stream.is_valid()) {
+	if (stream.is_null()) {
 		return;
 	}
-	if (!playback.is_valid() || !playback->is_playing() || playback->is_paused()) {
+	if (playback.is_null() || !playback->is_playing() || playback->is_paused()) {
 		return;
 	}
 
@@ -138,6 +136,7 @@ void VideoStreamPlayer::_notification(int p_notification) {
 		} break;
 
 		case NOTIFICATION_EXIT_TREE: {
+			stop();
 			AudioServer::get_singleton()->remove_mix_callback(_mix_audios, this);
 		} break;
 
@@ -160,11 +159,12 @@ void VideoStreamPlayer::_notification(int p_notification) {
 			playback->update(delta); // playback->is_playing() returns false in the last video frame
 
 			if (!playback->is_playing()) {
+				resampler.flush();
 				if (loop) {
 					play();
 					return;
 				}
-				emit_signal(SceneStringNames::get_singleton()->finished);
+				emit_signal(SceneStringName(finished));
 			}
 		} break;
 
@@ -180,6 +180,7 @@ void VideoStreamPlayer::_notification(int p_notification) {
 			draw_texture_rect(texture, Rect2(Point2(), s), false);
 		} break;
 
+		case NOTIFICATION_SUSPENDED:
 		case NOTIFICATION_PAUSED: {
 			if (is_playing() && !is_paused()) {
 				paused_from_tree = true;
@@ -190,6 +191,13 @@ void VideoStreamPlayer::_notification(int p_notification) {
 				last_audio_time = 0;
 			}
 		} break;
+
+		case NOTIFICATION_UNSUSPENDED: {
+			if (get_tree()->is_paused()) {
+				break;
+			}
+			[[fallthrough]];
+		}
 
 		case NOTIFICATION_UNPAUSED: {
 			if (paused_from_tree) {
@@ -205,7 +213,7 @@ void VideoStreamPlayer::_notification(int p_notification) {
 }
 
 Size2 VideoStreamPlayer::get_minimum_size() const {
-	if (!expand && !texture.is_null()) {
+	if (!expand && texture.is_valid()) {
 		return texture->get_size();
 	} else {
 		return Size2();
@@ -237,6 +245,12 @@ bool VideoStreamPlayer::has_loop() const {
 void VideoStreamPlayer::set_stream(const Ref<VideoStream> &p_stream) {
 	stop();
 
+	// Make sure to handle stream changes seamlessly, e.g. when done via
+	// translation remapping.
+	if (stream.is_valid()) {
+		stream->disconnect_changed(callable_mp(this, &VideoStreamPlayer::set_stream));
+	}
+
 	AudioServer::get_singleton()->lock();
 	mix_buffer.resize(AudioServer::get_singleton()->thread_get_mix_buffer_size());
 	stream = p_stream;
@@ -248,7 +262,11 @@ void VideoStreamPlayer::set_stream(const Ref<VideoStream> &p_stream) {
 	}
 	AudioServer::get_singleton()->unlock();
 
-	if (!playback.is_null()) {
+	if (stream.is_valid()) {
+		stream->connect_changed(callable_mp(this, &VideoStreamPlayer::set_stream).bind(stream));
+	}
+
+	if (playback.is_valid()) {
 		playback->set_paused(paused);
 		texture = playback->get_texture();
 
@@ -451,7 +469,7 @@ StringName VideoStreamPlayer::get_bus() const {
 			return bus;
 		}
 	}
-	return SceneStringNames::get_singleton()->Master;
+	return SceneStringName(Master);
 }
 
 void VideoStreamPlayer::_validate_property(PropertyInfo &p_property) const {

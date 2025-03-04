@@ -45,6 +45,7 @@
 #include "core/os/os.h"
 #include "editor/editor_help.h"
 #include "editor/editor_node.h"
+
 #include "modules/gdscript/gdscript_analyzer.h"
 #include "modules/regex/regex.h"
 
@@ -76,7 +77,7 @@ namespace GDScriptTests {
 // LSP GDScript test scripts are located inside project of other GDScript tests:
 // Cannot reset `ProjectSettings` (singleton) -> Cannot load another workspace and resources in there.
 // -> Reuse GDScript test project. LSP specific scripts are then placed inside `lsp` folder.
-//    Access via `res://lsp/my_script.notest.gd`.
+//    Access via `res://lsp/my_script.gd`.
 const String root = "modules/gdscript/tests/scripts/";
 
 /*
@@ -227,7 +228,7 @@ Vector<InlineTestData> read_tests(const String &p_path) {
 		if (InlineTestData::try_parse(lines, i, d)) {
 			if (!d.name.is_empty()) {
 				// Safety check: names must be unique.
-				if (names.find(d.name) != -1) {
+				if (names.has(d.name)) {
 					FAIL(vformat("Duplicated name '%s' in '%s'. Names must be unique!", d.name, p_path));
 				}
 				names.append(d.name);
@@ -375,6 +376,18 @@ func f():
 			gd.to_lsp(lines);
 		}
 
+		SUBCASE("special case: zero column for root class") {
+			GodotPosition gd(1, 0);
+			lsp::Position expected = lsp_pos(0, 0);
+			lsp::Position actual = gd.to_lsp(lines);
+			CHECK_EQ(actual, expected);
+		}
+		SUBCASE("special case: zero line and column for root class") {
+			GodotPosition gd(0, 0);
+			lsp::Position expected = lsp_pos(0, 0);
+			lsp::Position actual = gd.to_lsp(lines);
+			CHECK_EQ(actual, expected);
+		}
 		SUBCASE("special case: negative line for root class") {
 			GodotPosition gd(-1, 0);
 			lsp::Position expected = lsp_pos(0, 0);
@@ -394,7 +407,7 @@ func f():
 		Ref<GDScriptWorkspace> workspace = GDScriptLanguageProtocol::get_singleton()->get_workspace();
 
 		{
-			String path = "res://lsp/local_variables.notest.gd";
+			String path = "res://lsp/local_variables.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
@@ -413,7 +426,7 @@ func f():
 		}
 
 		SUBCASE("Can get correct ranges for indented variables") {
-			String path = "res://lsp/indentation.notest.gd";
+			String path = "res://lsp/indentation.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
@@ -421,7 +434,7 @@ func f():
 		}
 
 		SUBCASE("Can get correct ranges for scopes") {
-			String path = "res://lsp/scopes.notest.gd";
+			String path = "res://lsp/scopes.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
@@ -429,7 +442,7 @@ func f():
 		}
 
 		SUBCASE("Can get correct ranges for lambda") {
-			String path = "res://lsp/lambdas.notest.gd";
+			String path = "res://lsp/lambdas.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
@@ -437,7 +450,7 @@ func f():
 		}
 
 		SUBCASE("Can get correct ranges for inner class") {
-			String path = "res://lsp/class.notest.gd";
+			String path = "res://lsp/class.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
@@ -445,7 +458,7 @@ func f():
 		}
 
 		SUBCASE("Can get correct ranges for inner class") {
-			String path = "res://lsp/enums.notest.gd";
+			String path = "res://lsp/enums.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
@@ -453,7 +466,7 @@ func f():
 		}
 
 		SUBCASE("Can get correct ranges for shadowing & shadowed variables") {
-			String path = "res://lsp/shadowing_initializer.notest.gd";
+			String path = "res://lsp/shadowing_initializer.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
@@ -461,11 +474,30 @@ func f():
 		}
 
 		SUBCASE("Can get correct ranges for properties and getter/setter") {
-			String path = "res://lsp/properties.notest.gd";
+			String path = "res://lsp/properties.gd";
 			assert_no_errors_in(path);
 			String uri = workspace->get_file_uri(path);
 			Vector<InlineTestData> all_test_data = read_tests(path);
 			test_resolve_symbols(uri, all_test_data, all_test_data);
+		}
+
+		memdelete(proto);
+		finish_language();
+	}
+	TEST_CASE("[workspace][document_symbol]") {
+		GDScriptLanguageProtocol *proto = initialize(root);
+		REQUIRE(proto);
+
+		SUBCASE("selectionRange of root class must be inside range") {
+			String path = "res://lsp/first_line_comment.gd";
+			assert_no_errors_in(path);
+			GDScriptLanguageProtocol::get_singleton()->get_workspace()->parse_local_script(path);
+			ExtendGDScriptParser *parser = GDScriptLanguageProtocol::get_singleton()->get_workspace()->parse_results[path];
+			REQUIRE(parser);
+			lsp::DocumentSymbol cls = parser->get_symbols();
+
+			REQUIRE(((cls.range.start.line == cls.selectionRange.start.line && cls.range.start.character <= cls.selectionRange.start.character) || (cls.range.start.line < cls.selectionRange.start.line)));
+			REQUIRE(((cls.range.end.line == cls.selectionRange.end.line && cls.range.end.character >= cls.selectionRange.end.character) || (cls.range.end.line > cls.selectionRange.end.line)));
 		}
 
 		memdelete(proto);

@@ -75,9 +75,14 @@ static void handle_crash(int sig) {
 	signal(SIGSEGV, SIG_DFL);
 	signal(SIGFPE, SIG_DFL);
 	signal(SIGILL, SIG_DFL);
+	signal(SIGTRAP, SIG_DFL);
 
 	if (OS::get_singleton() == nullptr) {
 		abort();
+	}
+
+	if (OS::get_singleton()->is_crash_handler_silent()) {
+		std::_Exit(0);
 	}
 
 	void *bt_buffer[256];
@@ -148,6 +153,7 @@ static void handle_crash(int sig) {
 				args.push_back("-arch");
 				args.push_back("arm64");
 #endif
+				args.push_back("--fullPath");
 				args.push_back("-l");
 				snprintf(str, 1024, "%p", load_addr);
 				args.push_back(str);
@@ -193,6 +199,7 @@ void CrashHandler::disable() {
 	signal(SIGSEGV, SIG_DFL);
 	signal(SIGFPE, SIG_DFL);
 	signal(SIGILL, SIG_DFL);
+	signal(SIGTRAP, SIG_DFL);
 #endif
 
 	disabled = true;
@@ -203,5 +210,6 @@ void CrashHandler::initialize() {
 	signal(SIGSEGV, handle_crash);
 	signal(SIGFPE, handle_crash);
 	signal(SIGILL, handle_crash);
+	signal(SIGTRAP, handle_crash);
 #endif
 }

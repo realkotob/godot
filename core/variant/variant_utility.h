@@ -52,13 +52,13 @@ struct VariantUtilityFunctions {
 	static double fmod(double b, double r);
 	static double fposmod(double b, double r);
 	static int64_t posmod(int64_t b, int64_t r);
-	static Variant floor(Variant x, Callable::CallError &r_error);
+	static Variant floor(const Variant &x, Callable::CallError &r_error);
 	static double floorf(double x);
 	static int64_t floori(double x);
-	static Variant ceil(Variant x, Callable::CallError &r_error);
+	static Variant ceil(const Variant &x, Callable::CallError &r_error);
 	static double ceilf(double x);
 	static int64_t ceili(double x);
-	static Variant round(Variant x, Callable::CallError &r_error);
+	static Variant round(const Variant &x, Callable::CallError &r_error);
 	static double roundf(double x);
 	static int64_t roundi(double x);
 	static Variant abs(const Variant &x, Callable::CallError &r_error);
@@ -133,8 +133,7 @@ struct VariantUtilityFunctions {
 	static String type_string(Variant::Type p_type);
 	static void print(const Variant **p_args, int p_arg_count, Callable::CallError &r_error);
 	static void print_rich(const Variant **p_args, int p_arg_count, Callable::CallError &r_error);
-#undef print_verbose
-	static void print_verbose(const Variant **p_args, int p_arg_count, Callable::CallError &r_error);
+	static void _print_verbose(const Variant **p_args, int p_arg_count, Callable::CallError &r_error);
 	static void printerr(const Variant **p_args, int p_arg_count, Callable::CallError &r_error);
 	static void printt(const Variant **p_args, int p_arg_count, Callable::CallError &r_error);
 	static void prints(const Variant **p_args, int p_arg_count, Callable::CallError &r_error);
