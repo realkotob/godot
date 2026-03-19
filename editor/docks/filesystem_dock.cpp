@@ -2614,18 +2614,22 @@ void FileSystemDock::_file_option(int p_option, const Vector<String> &p_selected
 		} break;
 
 		case FILE_MENU_NEW_MATERIAL_FROM_SHADER: {
-			if (p_selected.size() == 1) {
-				const String &fpath = p_selected[0];
-				
-				Ref<ShaderMaterial> shader_material = Ref<ShaderMaterial>(memnew(ShaderMaterial));
-				shader_material->set_shader(Ref<Shader>(ResourceLoader::load(fpath)));
-				
-				String name = fpath.get_file().get_basename() + "_material.tres";
-				String save_path = fpath.get_base_dir().path_join(name);
-				
-				EditorNode::get_singleton()->push_item(shader_material.ptr());
-				EditorNode::get_singleton()->save_resource_as(shader_material, save_path);
+			if (p_selected.size() != 1) {
+				return;
 			}
+			const String &fpath = p_selected[0];
+			
+			Ref<ShaderMaterial> shader_material = Ref<ShaderMaterial>(memnew(ShaderMaterial));
+			shader_material->set_shader(Ref<Shader>(ResourceLoader::load(fpath)));
+				
+			String name = fpath.get_file().get_basename() + "_material.tres";
+			String save_path = fpath.get_base_dir().path_join(name);
+			
+			// Set the path so the save dialog uses it as the suggested file name.
+			shader_material->set_path(save_path);
+			
+			EditorNode::get_singleton()->push_item(shader_material.ptr());
+			EditorNode::get_singleton()->save_resource_as(shader_material, fpath.get_base_dir());
 		} break;
 
 		case FILE_MENU_REIMPORT: {
