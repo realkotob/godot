@@ -1619,16 +1619,6 @@ void FileSystemDock::_try_duplicate_item(const FileOrFolder &p_item, const Strin
 	}
 }
 
-void FileSystemDock::_try_create_material_from_shader(const FileOrFolder &p_item, const String &p_new_path) const {
-	Ref<ShaderMaterial> shader_material = Ref<ShaderMaterial>(memnew(ShaderMaterial));
-	shader_material->set_shader(Ref<Shader>(ResourceLoader::load(p_item.path)));
-	
-	Error err = ResourceSaver::save(shader_material, p_new_path);
-	if (err != OK) {
-		EditorNode::get_singleton()->show_warning(TTR("Could not save shader material!"), TTR("New Shader Material"));
-	}
-}
-
 void FileSystemDock::_update_resource_paths_after_move(const HashMap<String, String> &p_renames) const {
 	// Rename all resources loaded, be it subresources or actual resources.
 	List<Ref<Resource>> cached;
@@ -1938,14 +1928,6 @@ void FileSystemDock::_duplicate_operation_confirm(const String &p_path) {
 		}
 	}
 	_try_duplicate_item(to_duplicate, p_path);
-}
-
-void FileSystemDock::_new_material_from_shader_confirm(const String &p_path) {
-	_try_create_material_from_shader(to_duplicate, p_path);
-	
-	// Rescan everything.
-	print_verbose("FileSystem: calling rescan.");
-	_rescan();
 }
 
 void FileSystemDock::_move_confirm() {
@@ -2633,12 +2615,16 @@ void FileSystemDock::_file_option(int p_option, const Vector<String> &p_selected
 
 		case FILE_MENU_NEW_MATERIAL_FROM_SHADER: {
 			if (p_selected.size() == 1) {
-				to_duplicate.path = p_selected[0];
-				to_duplicate.is_file = true;
-				String name = p_selected[0].get_file().get_basename() + "_material.tres";
-				make_dir_dialog->config(p_selected[0].get_base_dir(), callable_mp(this, &FileSystemDock::_new_material_from_shader_confirm),
-						DirectoryCreateDialog::MODE_FILE, TTR("New Material From Shader:") + " " + p_selected[0].get_file(), name);
-				make_dir_dialog->popup_centered();
+				const String &fpath = p_selected[0];
+				
+				Ref<ShaderMaterial> shader_material = Ref<ShaderMaterial>(memnew(ShaderMaterial));
+				shader_material->set_shader(Ref<Shader>(ResourceLoader::load(fpath)));
+				
+				String name = fpath.get_file().get_basename() + "_material.tres";
+				String save_path = fpath.get_base_dir().path_join(name);
+				
+				EditorNode::get_singleton()->push_item(shader_material.ptr());
+				EditorNode::get_singleton()->save_resource_as(shader_material, save_path);
 			}
 		} break;
 

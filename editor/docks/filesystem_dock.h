@@ -306,7 +306,6 @@ private:
 	void _find_file_owners(EditorFileSystemDirectory *p_efsd, const HashSet<String> &p_renames, HashSet<String> &r_file_owners) const;
 	void _try_move_item(const FileOrFolder &p_item, const String &p_new_path, HashMap<String, String> &p_file_renames, HashMap<String, String> &p_folder_renames);
 	void _try_duplicate_item(const FileOrFolder &p_item, const String &p_new_path) const;
-	void _try_create_material_from_shader(const FileOrFolder &p_item, const String &p_new_path) const;
 	void _before_move(HashSet<String> &r_file_owners) const;
 	void _update_dependencies_after_move(const HashMap<String, String> &p_renames, const HashSet<String> &p_file_owners) const;
 	void _update_resource_paths_after_move(const HashMap<String, String> &p_renames) const;
@@ -325,7 +324,6 @@ private:
 	void _make_scene_confirm();
 	void _rename_operation_confirm();
 	void _duplicate_operation_confirm(const String &p_path);
-	void _new_material_from_shader_confirm(const String &p_path);
 	void _move_confirm();
 	void _overwrite_dialog_action(bool p_overwrite);
 	void _convert_dialog_action();
