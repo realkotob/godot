@@ -3444,8 +3444,6 @@ void FileSystemDock::_file_and_folders_fill_popup(PopupMenu *p_popup, const Vect
 						p_popup->add_icon_item(get_editor_theme_icon(SNAME("MainPlay")), TTRC("Run"), FILE_MENU_RUN_SCRIPT);
 					}
 				}
-			} else if (type == "Shader" || type == "VisualShader") {
-				p_popup->add_icon_item(get_editor_theme_icon(SNAME("ShaderMaterial")), TTRC("New Material From Shader"), FILE_MENU_NEW_MATERIAL_FROM_SHADER);
 			}
 			p_popup->add_separator();
 		}
@@ -3464,6 +3462,10 @@ void FileSystemDock::_file_and_folders_fill_popup(PopupMenu *p_popup, const Vect
 		p_popup->add_submenu_node_item(TTRC("Create New"), new_menu, FILE_MENU_NEW);
 		p_popup->set_item_icon(p_popup->get_item_index(FILE_MENU_NEW), get_editor_theme_icon(SNAME("Add")));
 
+		const String type = EditorFileSystem::get_singleton()->get_file_type(p_paths[0]);
+		if (type == "Shader" || type == "VisualShader") {
+			new_menu->add_icon_item(get_editor_theme_icon(SNAME("ShaderMaterial")), TTRC("Material From Shader..."), FILE_MENU_NEW_MATERIAL_FROM_SHADER);
+		}
 		new_menu->add_icon_item(get_editor_theme_icon(SNAME("Folder")), TTRC("Folder..."), FILE_MENU_NEW_FOLDER);
 		new_menu->set_item_shortcut(-1, ED_GET_SHORTCUT("filesystem_dock/new_folder"));
 		new_menu->add_icon_item(get_editor_theme_icon(SNAME("PackedScene")), TTRC("Scene..."), FILE_MENU_NEW_SCENE);
