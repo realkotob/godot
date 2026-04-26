@@ -228,6 +228,11 @@ bool PackedData::remove_pack(const String &p_pack, bool p_restore_files) {
 		}
 	}
 
+	// A `pack_contributions` entry is only created alongside a real entry in
+	// `files`, `shadowed`, or `delta_patches`, so the loop above must have
+	// matched something. A miss here means those maps have desynced.
+	DEV_ASSERT(any_removed);
+
 	pack_contributions.remove(it);
 	return any_removed;
 }
