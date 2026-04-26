@@ -30,6 +30,7 @@
 
 #include "movie_writer_pngwav.h"
 
+#include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/io/dir_access.h"
 #include "core/io/file_access.h"
@@ -80,6 +81,7 @@ Error MovieWriterPNGWAV::write_begin(const Size2i &p_movie_size, uint32_t p_fps,
 			number++;
 		}
 		base_path = tmp_basename;
+		Engine::get_singleton()->set_write_movie_path(base_path);
 	} else {
 		//Remove existing files before writing anew
 		uint32_t idx = 0;

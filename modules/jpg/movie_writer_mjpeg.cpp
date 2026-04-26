@@ -30,6 +30,7 @@
 
 #include "movie_writer_mjpeg.h"
 
+#include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/io/file_access.h"
 
@@ -67,6 +68,7 @@ Error MovieWriterMJPEG::write_begin(const Size2i &p_movie_size, uint32_t p_fps, 
 			number++;
 		}
 		base_path = tmp_fullpath;
+		Engine::get_singleton()->set_write_movie_path(base_path);
 	}
 
 	f = FileAccess::open(base_path, FileAccess::WRITE_READ);
