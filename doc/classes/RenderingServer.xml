@@ -2573,6 +2573,16 @@
 				Returns a mesh's surface's buffer arrays.
 			</description>
 		</method>
+		<method name="mesh_surface_get_attribute_buffer_rd_rid" qualifiers="const">
+			<return type="RID" />
+			<param index="0" name="mesh" type="RID" />
+			<param index="1" name="surface" type="int" />
+			<description>
+				Returns the [RenderingDevice] [RID] handle of the attribute buffer of the given mesh surface (Color, UV, UV2, Custom0-3). The returned [RID] can be used as any other buffer on the [RenderingDevice], so the surface attributes can be read or written from a compute shader without a CPU round-trip.
+				To bind the buffer as a storage buffer in compute, the surface must have been created with the [constant ARRAY_FLAG_USE_STORAGE_BUFFER] flag set in its format.
+				Returns an invalid [RID] if the surface has no attribute buffer or if the rendering backend does not expose [RenderingDevice] [RID]s (such as the OpenGL backend).
+			</description>
+		</method>
 		<method name="mesh_surface_get_blend_shape_arrays" qualifiers="const">
 			<return type="Array[]" />
 			<param index="0" name="mesh" type="RID" />
@@ -2630,24 +2640,6 @@
 				Returns the stride of the vertex positions for a mesh with given [param format]. Note importantly that vertex positions are stored consecutively and are not interleaved with the other attributes in the vertex buffer (normals and tangents).
 			</description>
 		</method>
-		<method name="mesh_surface_get_material" qualifiers="const">
-			<return type="RID" />
-			<param index="0" name="mesh" type="RID" />
-			<param index="1" name="surface" type="int" />
-			<description>
-				Returns a mesh's surface's material.
-			</description>
-		</method>
-		<method name="mesh_surface_get_attribute_buffer_rd_rid" qualifiers="const">
-			<return type="RID" />
-			<param index="0" name="mesh" type="RID" />
-			<param index="1" name="surface" type="int" />
-			<description>
-				Returns the [RenderingDevice] [RID] handle of the attribute buffer of the given mesh surface (Color, UV, UV2, Custom0-3). The returned [RID] can be used as any other buffer on the [RenderingDevice], so the surface attributes can be read or written from a compute shader without a CPU round-trip.
-				To bind the buffer as a storage buffer in compute, the surface must have been created with the [constant ARRAY_FLAG_USE_STORAGE_BUFFER] flag set in its format.
-				Returns an invalid [RID] if the surface has no attribute buffer or if the rendering backend does not expose [RenderingDevice] [RID]s (such as the OpenGL backend).
-			</description>
-		</method>
 		<method name="mesh_surface_get_index_buffer_rd_rid" qualifiers="const">
 			<return type="RID" />
 			<param index="0" name="mesh" type="RID" />
@@ -2656,6 +2648,14 @@
 				Returns the [RenderingDevice] [RID] handle of the index buffer of the given mesh surface. The returned [RID] can be used as any other buffer on the [RenderingDevice], so the indices can be read or written from a compute shader without a CPU round-trip.
 				To bind the buffer as a storage buffer in compute, the surface must have been created with the [constant ARRAY_FLAG_USE_STORAGE_BUFFER] flag set in its format.
 				Returns an invalid [RID] if the surface is not indexed or if the rendering backend does not expose [RenderingDevice] [RID]s (such as the OpenGL backend).
+			</description>
+		</method>
+		<method name="mesh_surface_get_material" qualifiers="const">
+			<return type="RID" />
+			<param index="0" name="mesh" type="RID" />
+			<param index="1" name="surface" type="int" />
+			<description>
+				Returns a mesh's surface's material.
 			</description>
 		</method>
 		<method name="mesh_surface_get_skin_buffer_rd_rid" qualifiers="const">
