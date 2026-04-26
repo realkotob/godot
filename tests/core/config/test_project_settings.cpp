@@ -34,6 +34,9 @@ TEST_FORCE_LINK(test_project_settings)
 
 #include "core/config/project_settings.h"
 #include "core/io/dir_access.h"
+#include "core/io/file_access.h"
+#include "core/io/file_access_pack.h"
+#include "core/io/pck_packer.h"
 #include "core/object/message_queue.h"
 #include "core/variant/variant.h"
 #include "tests/signal_watcher.h"
@@ -226,6 +229,161 @@ TEST_CASE("[ProjectSettings] No tracking when setting same value") {
 	int count_after = ProjectSettings::get_singleton()->get_changed_settings().size();
 
 	CHECK_EQ(count_before, count_after);
+}
+
+// Helper: build a single-entry PCK containing `p_target` with `p_contents` bytes.
+static String build_pck(const String &p_filename, const String &p_target, const String &p_contents) {
+	const String pack_path = TestUtils::get_temp_path(p_filename);
+	PCKPacker pck;
+	REQUIRE(pck.pck_start(pack_path) == OK);
+	REQUIRE(pck.add_file_from_buffer(p_target, p_contents.to_utf8_buffer()) == OK);
+	REQUIRE(pck.flush() == OK);
+	return pack_path;
+}
+
+static String read_packed_text(const String &p_path) {
+	Ref<FileAccess> f = FileAccess::open(p_path, FileAccess::READ);
+	if (f.is_null()) {
+		return String();
+	}
+	const uint64_t len = f->get_length();
+	Vector<uint8_t> buf;
+	buf.resize(len);
+	f->get_buffer(buf.ptrw(), len);
+	return String::utf8((const char *)buf.ptr(), len);
+}
+
+// `load_resource_pack` and `unload_resource_pack` are protected; route through
+// the bound `Object::call` interface that the script API uses.
+static bool ps_load_pack(const String &p_pack, bool p_replace_files = true) {
+	return (bool)ProjectSettings::get_singleton()->call("load_resource_pack", p_pack, p_replace_files);
+}
+
+static bool ps_unload_pack(const String &p_pack, bool p_restore_files = true) {
+	return (bool)ProjectSettings::get_singleton()->call("unload_resource_pack", p_pack, p_restore_files);
+}
+
+TEST_CASE("[ProjectSettings] unload_resource_pack basic") {
+	const String target = "res://unload_basic/file.txt";
+	const String pack_path = build_pck("unload_basic.pck", target, "hello");
+
+	REQUIRE(ps_load_pack(pack_path));
+	CHECK(PackedData::get_singleton()->has_path(target));
+
+	CHECK(ps_unload_pack(pack_path));
+	CHECK_FALSE(PackedData::get_singleton()->has_path(target));
+
+	// Re-unload of an already-removed pack returns false.
+	CHECK_FALSE(ps_unload_pack(pack_path));
+}
+
+TEST_CASE("[ProjectSettings] unload_resource_pack restores shadowed entry") {
+	const String target = "res://unload_restore/file.txt";
+	const String base_pack = build_pck("unload_restore_base.pck", target, "BASE");
+	const String mod_pack = build_pck("unload_restore_mod.pck", target, "MOD!");
+
+	REQUIRE(ps_load_pack(base_pack));
+	REQUIRE(ps_load_pack(mod_pack, true));
+	CHECK_EQ(read_packed_text(target), "MOD!");
+
+	CHECK(ps_unload_pack(mod_pack, true));
+	CHECK(PackedData::get_singleton()->has_path(target));
+	CHECK_EQ(read_packed_text(target), "BASE");
+
+	// Cleanup.
+	CHECK(ps_unload_pack(base_pack));
+	CHECK_FALSE(PackedData::get_singleton()->has_path(target));
+}
+
+TEST_CASE("[ProjectSettings] unload_resource_pack drops without restoring") {
+	const String target = "res://unload_no_restore/file.txt";
+	const String base_pack = build_pck("unload_no_restore_base.pck", target, "BASE");
+	const String mod_pack = build_pck("unload_no_restore_mod.pck", target, "MOD!");
+
+	REQUIRE(ps_load_pack(base_pack));
+	REQUIRE(ps_load_pack(mod_pack, true));
+
+	CHECK(ps_unload_pack(mod_pack, false));
+	CHECK_FALSE(PackedData::get_singleton()->has_path(target));
+
+	// Unloading the base pack must succeed (its contribution was kept in the
+	// shadow stack and is still tracked) and leave a clean state.
+	CHECK(ps_unload_pack(base_pack));
+	CHECK_FALSE(PackedData::get_singleton()->has_path(target));
+}
+
+TEST_CASE("[ProjectSettings] unload_resource_pack handles stacked overrides") {
+	const String target = "res://unload_stack/file.txt";
+	const String pack_a = build_pck("unload_stack_a.pck", target, "AAAA");
+	const String pack_b = build_pck("unload_stack_b.pck", target, "BBBB");
+	const String pack_c = build_pck("unload_stack_c.pck", target, "CCCC");
+
+	REQUIRE(ps_load_pack(pack_a));
+	REQUIRE(ps_load_pack(pack_b, true));
+	REQUIRE(ps_load_pack(pack_c, true));
+	CHECK_EQ(read_packed_text(target), "CCCC");
+
+	// Unload the middle of the stack: C remains active, B is spliced out
+	// of the shadow stack, A is still pending below.
+	CHECK(ps_unload_pack(pack_b, true));
+	CHECK_EQ(read_packed_text(target), "CCCC");
+
+	// Unloading C now must restore A (since B is gone from the stack).
+	CHECK(ps_unload_pack(pack_c, true));
+	CHECK_EQ(read_packed_text(target), "AAAA");
+
+	CHECK(ps_unload_pack(pack_a));
+	CHECK_FALSE(PackedData::get_singleton()->has_path(target));
+}
+
+TEST_CASE("[ProjectSettings] unload_resource_pack rejects mismatched pack path") {
+	const String target = "res://unload_mismatch/file.txt";
+	const String pack_path = build_pck("unload_mismatch.pck", target, "hello");
+
+	REQUIRE(ps_load_pack(pack_path));
+
+	// Insert `/./` before the filename: equivalent file system path but
+	// not byte-identical to what was passed to `load_resource_pack`. The
+	// contract requires an exact match.
+	const int slash_pos = pack_path.rfind_char('/');
+	REQUIRE(slash_pos > 0);
+	const String mismatched = pack_path.left(slash_pos) + "/./" + pack_path.substr(slash_pos + 1);
+	CHECK_FALSE(ps_unload_pack(mismatched));
+	CHECK(PackedData::get_singleton()->has_path(target));
+
+	CHECK(ps_unload_pack(pack_path));
+	CHECK_FALSE(PackedData::get_singleton()->has_path(target));
+}
+
+TEST_CASE("[ProjectSettings] unload_resource_pack returns false for unknown pack") {
+	CHECK_FALSE(ps_unload_pack(TestUtils::get_temp_path("never_loaded.pck")));
+}
+
+TEST_CASE("[ProjectSettings] unload_resource_pack rejects res://") {
+	CHECK_FALSE(ps_unload_pack("res://"));
+}
+
+TEST_CASE("[PackedData] remove_pack drops delta contributions") {
+	// Delta entries are added through PackSource paths that PCKPacker does
+	// not expose, so drive `add_path` directly. The pack name is just an
+	// identifier here; nothing tries to open the file.
+	const String base_pack = "test://delta_base.pck";
+	const String patch_pack = "test://delta_patch.pck";
+	const String path = "delta_test/file.bin";
+	uint8_t md5[16] = {};
+
+	PackedData::get_singleton()->add_path(base_pack, path, 0, 0, md5, nullptr, false, false, false, false, "");
+	PackedData::get_singleton()->add_path(patch_pack, path, 0, 0, md5, nullptr, false, false, false, true, "");
+
+	CHECK(PackedData::get_singleton()->has_delta_patches(path));
+
+	// Removing only the patch pack drops the delta but leaves the base entry.
+	CHECK(PackedData::get_singleton()->remove_pack(patch_pack, true));
+	CHECK_FALSE(PackedData::get_singleton()->has_delta_patches(path));
+	CHECK(PackedData::get_singleton()->has_path(path));
+
+	CHECK(PackedData::get_singleton()->remove_pack(base_pack, true));
+	CHECK_FALSE(PackedData::get_singleton()->has_path(path));
 }
 
 } // namespace TestProjectSettings

@@ -67,9 +67,17 @@ void PackedData::add_path(const String &p_pkg_path, const String &p_path, uint64
 
 	if (p_delta) {
 		delta_patches[pmd5].push_back(pf);
-	} else if (!exists || p_replace_files) {
+		pack_contributions[p_pkg_path].push_back({ pmd5, simplified_path });
+	} else if (!exists) {
 		files[pmd5] = pf;
 		delta_patches[pmd5].clear();
+		pack_contributions[p_pkg_path].push_back({ pmd5, simplified_path });
+	} else if (p_replace_files) {
+		// Save the displaced entry so it can be restored on unload.
+		shadowed[pmd5].push_back(files[pmd5]);
+		files[pmd5] = pf;
+		delta_patches[pmd5].clear();
+		pack_contributions[p_pkg_path].push_back({ pmd5, simplified_path });
 	}
 
 	if (!exists) {
@@ -124,6 +132,104 @@ void PackedData::remove_path(const String &p_path) {
 	cd->files.erase(simplified_path.get_file());
 
 	files.erase(pmd5);
+}
+
+void PackedData::_remove_from_packed_dir(const String &p_simplified_path) {
+	PackedDir *cd = root;
+	Vector<PackedDir *> path_dirs;
+
+	if (p_simplified_path.contains_char('/')) {
+		Vector<String> ds = p_simplified_path.get_base_dir().split("/");
+
+		for (int j = 0; j < ds.size(); j++) {
+			HashMap<String, PackedDir *>::Iterator sub = cd->subdirs.find(ds[j]);
+			if (!sub) {
+				return; // Path was never present.
+			}
+			path_dirs.push_back(cd);
+			cd = sub->value;
+		}
+	}
+
+	String filename = p_simplified_path.get_file();
+	if (!filename.is_empty()) {
+		cd->files.erase(filename);
+	}
+
+	// Prune empty parent directories on the way back up.
+	for (int i = path_dirs.size() - 1; i >= 0; i--) {
+		if (!cd->files.is_empty() || !cd->subdirs.is_empty()) {
+			break;
+		}
+		PackedDir *parent = path_dirs[i];
+		parent->subdirs.erase(cd->name);
+		memdelete(cd);
+		cd = parent;
+	}
+}
+
+bool PackedData::remove_pack(const String &p_pack, bool p_restore_files) {
+	HashMap<String, Vector<PackContribution>>::Iterator it = pack_contributions.find(p_pack);
+	if (!it) {
+		return false;
+	}
+
+	bool any_removed = false;
+
+	for (const PackContribution &c : it->value) {
+		const PathMD5 &pmd5 = c.pmd5;
+
+		// (1) Active-entry case.
+		HashMap<PathMD5, PackedFile, PathMD5>::Iterator active = files.find(pmd5);
+		if (active && active->value.pack == p_pack) {
+			HashMap<PathMD5, Vector<PackedFile>, PathMD5>::Iterator sh = shadowed.find(pmd5);
+
+			if (p_restore_files && sh && !sh->value.is_empty()) {
+				// Pop the most recently displaced entry into active.
+				active->value = sh->value[sh->value.size() - 1];
+				sh->value.remove_at(sh->value.size() - 1);
+				if (sh->value.is_empty()) {
+					shadowed.remove(sh);
+				}
+			} else {
+				files.remove(active);
+				_remove_from_packed_dir(c.simplified_path);
+			}
+			any_removed = true;
+		}
+
+		// (2) Shadowed-entry case: this pack may sit in the shadow stack
+		// because a later pack overrode it.
+		HashMap<PathMD5, Vector<PackedFile>, PathMD5>::Iterator sh = shadowed.find(pmd5);
+		if (sh) {
+			for (int i = sh->value.size() - 1; i >= 0; i--) {
+				if (sh->value[i].pack == p_pack) {
+					sh->value.remove_at(i);
+					any_removed = true;
+				}
+			}
+			if (sh->value.is_empty()) {
+				shadowed.remove(sh);
+			}
+		}
+
+		// (3) Delta patches contributed by this pack.
+		HashMap<PathMD5, Vector<PackedFile>, PathMD5>::Iterator dp = delta_patches.find(pmd5);
+		if (dp) {
+			for (int i = dp->value.size() - 1; i >= 0; i--) {
+				if (dp->value[i].pack == p_pack) {
+					dp->value.remove_at(i);
+					any_removed = true;
+				}
+			}
+			if (dp->value.is_empty()) {
+				delta_patches.remove(dp);
+			}
+		}
+	}
+
+	pack_contributions.remove(it);
+	return any_removed;
 }
 
 void PackedData::add_pack_source(PackSource *p_source) {
@@ -184,6 +290,8 @@ void PackedData::_get_file_paths(PackedDir *p_dir, const String &p_parent_dir, H
 void PackedData::clear() {
 	files.clear();
 	delta_patches.clear();
+	shadowed.clear();
+	pack_contributions.clear();
 	_free_packed_dirs(root);
 	root = memnew(PackedDir);
 }

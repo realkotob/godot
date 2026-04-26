@@ -623,6 +623,31 @@ bool ProjectSettings::_load_resource_pack(const String &p_pack, bool p_replace_f
 	return true;
 }
 
+bool ProjectSettings::unload_resource_pack(const String &p_pack, bool p_restore_files) {
+	if (PackedData::get_singleton()->is_disabled()) {
+		return false;
+	}
+
+	if (p_pack == "res://") {
+		// Mirrors the guard in `_load_resource_pack`: the resource directory
+		// source is for internal use and cannot be unloaded.
+		return false;
+	}
+
+	bool ok = PackedData::get_singleton()->remove_pack(p_pack, p_restore_files);
+	if (!ok) {
+		return false;
+	}
+
+	if (project_loaded) {
+		// Mirrors the post-load housekeeping in `_load_resource_pack`.
+		refresh_global_class_list();
+		ResourceUID::get_singleton()->load_from_cache(false);
+	}
+
+	return true;
+}
+
 void ProjectSettings::_convert_to_last_version(int p_from_version) {
 #ifndef DISABLE_DEPRECATED
 	if (p_from_version <= 3) {
@@ -1636,6 +1661,7 @@ void ProjectSettings::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("globalize_path", "path"), &ProjectSettings::globalize_path);
 	ClassDB::bind_method(D_METHOD("save"), &ProjectSettings::save);
 	ClassDB::bind_method(D_METHOD("load_resource_pack", "pack", "replace_files", "offset"), &ProjectSettings::load_resource_pack, DEFVAL(true), DEFVAL(0));
+	ClassDB::bind_method(D_METHOD("unload_resource_pack", "pack", "restore_files"), &ProjectSettings::unload_resource_pack, DEFVAL(true));
 
 	ClassDB::bind_method(D_METHOD("save_custom", "file"), &ProjectSettings::_save_custom_bnd);
 

@@ -110,6 +110,21 @@ private:
 	HashMap<PathMD5, PackedFile, PathMD5> files;
 	HashMap<PathMD5, Vector<PackedFile>, PathMD5> delta_patches;
 
+	// Stack of displaced `PackedFile`s per path (top of vector is the most
+	// recently displaced entry). Lazily populated only when a `replace_files`
+	// add overrides an existing entry, so paths that never get shadowed pay
+	// nothing.
+	HashMap<PathMD5, Vector<PackedFile>, PathMD5> shadowed;
+
+	// Per-pack contribution list. Drives `remove_pack`. The simplified path is
+	// duplicated here (rather than added to `PackedFile`) so the common case
+	// does not pay the per-entry memory cost.
+	struct PackContribution {
+		PathMD5 pmd5;
+		String simplified_path;
+	};
+	HashMap<String, Vector<PackContribution>> pack_contributions;
+
 	Vector<PackSource *> sources;
 
 	PackedDir *root = nullptr;
@@ -119,6 +134,7 @@ private:
 
 	void _free_packed_dirs(PackedDir *p_dir);
 	void _get_file_paths(PackedDir *p_dir, const String &p_parent_dir, HashSet<String> &r_paths) const;
+	void _remove_from_packed_dir(const String &p_simplified_path);
 
 	_FORCE_INLINE_ PathMD5 _get_simplified_path(const String &p_path) {
 		String simplified_path = p_path;
@@ -133,6 +149,7 @@ public:
 	void add_pack_source(PackSource *p_source);
 	void add_path(const String &p_pkg_path, const String &p_path, uint64_t p_ofs, uint64_t p_size, const uint8_t *p_md5, PackSource *p_src, bool p_replace_files, bool p_encrypted = false, bool p_bundle = false, bool p_delta = false, const String &p_salt = String()); // for PackSource
 	void remove_path(const String &p_path);
+	bool remove_pack(const String &p_pack, bool p_restore_files);
 	uint8_t *get_file_hash(const String &p_path);
 	Vector<PackedFile> get_delta_patches(const String &p_path) const;
 	bool has_delta_patches(const String &p_path) const;

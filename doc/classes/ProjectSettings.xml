@@ -176,6 +176,20 @@
 				[b]Note:[/b] If a file from [param pack] shares the same path as a file already in the resource filesystem, any attempts to load that file will use the file from [param pack] unless [param replace_files] is set to [code]false[/code].
 				[b]Note:[/b] The optional [param offset] parameter can be used to specify the offset in bytes to the start of the resource pack. This is only supported for .pck files.
 				[b]Note:[/b] [DirAccess] will not show changes made to the contents of [code]res://[/code] after calling this function.
+				[b]Note:[/b] A loaded pack can be removed at runtime with [method unload_resource_pack].
+			</description>
+		</method>
+		<method name="unload_resource_pack">
+			<return type="bool" />
+			<param index="0" name="pack" type="String" />
+			<param index="1" name="restore_files" type="bool" default="true" />
+			<description>
+				Removes a resource pack previously added with [method load_resource_pack] from the resource filesystem ([code]res://[/code]). Returns [code]true[/code] when a pack with that path was found and at least one entry was removed, [code]false[/code] otherwise.
+				If [param restore_files] is [code]true[/code] (the default), entries this pack overrode at load time (with [code]replace_files[/code] enabled) are restored to their previous owner. If [code]false[/code], the entries are simply dropped without promoting the previously shadowed file.
+				[b]Note:[/b] [param pack] must be byte-identical to the path passed to [method load_resource_pack]. Trivial differences such as a leading [code]./[/code], a [code]res://[/code] prefix, or path separator changes will cause this method to return [code]false[/code]. Keep the pack path in a single variable and reuse it at both call sites.
+				[b]Note:[/b] Resources already loaded via [ResourceLoader] are not freed by this method; release any references you still hold to them.
+				[b]Note:[/b] On Windows, the on-disk pack file remains locked while in-flight [FileAccess] handles to its contents are alive. Drop those references before expecting the file to be writable again.
+				[b]Note:[/b] This method is intended to be called on the main thread when no concurrent loads from the same pack are in flight.
 			</description>
 		</method>
 		<method name="localize_path" qualifiers="const">
