@@ -96,6 +96,8 @@ Error MovieWriterPNGWAV::write_begin(const Size2i &p_movie_size, uint32_t p_fps,
 		}
 	}
 
+	output_path = base_path + ".png";
+
 	f_wav = FileAccess::open(base_path + ".wav", FileAccess::WRITE_READ);
 	ERR_FAIL_COND_V(f_wav.is_null(), ERR_CANT_OPEN);
 

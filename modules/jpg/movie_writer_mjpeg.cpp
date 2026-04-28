@@ -69,6 +69,8 @@ Error MovieWriterMJPEG::write_begin(const Size2i &p_movie_size, uint32_t p_fps, 
 		base_path = tmp_fullpath;
 	}
 
+	output_path = base_path;
+
 	f = FileAccess::open(base_path, FileAccess::WRITE_READ);
 
 	fps = p_fps;
